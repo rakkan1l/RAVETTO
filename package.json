@@ -5,9 +5,10 @@
   "scripts": {
     "dev:server": "cd server && npx tsx src/server.ts",
     "dev:client": "cd client && npm run dev",
-    "build:client": "cd client && npm run build",
-    "build:server": "cd server && npm run build",
-    "build": "npm run build:server && npm run build:client",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install && npm run build",
+    "build:all": "cd server && npm install && npm run build && cd ../client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build",
     "db:push": "cd server && npx prisma db push",
     "db:seed": "cd server && npx tsx prisma/seed.ts"
   },
@@ -22,6 +23,6 @@
   "author": "Ravetto Atelier",
   "license": "ISC",
   "devDependencies": {
-    "isomorphic-git": "^1.41.9"
+    "isomorphic-git": "^1.27.2"
   }
 }
