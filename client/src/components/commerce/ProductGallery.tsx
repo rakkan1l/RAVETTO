@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProductImage } from '../../types';
 import { Maximize2, X } from 'lucide-react';
 
@@ -14,20 +14,36 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
   productName,
 }) => {
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [activeImages, setActiveImages] = useState<ProductImage[]>(images);
 
-  // Filter images for selected color, falling back to all images
-  const colorFiltered = selectedColorId
-    ? images.filter((img) => img.colorId === selectedColorId || !img.colorId)
-    : images;
+  // 5. COLOR VARIANT TRANSITION SEQUENCE:
+  // current image -> fade -> slight blur -> new variant image -> sharpen (300-450ms total)
+  useEffect(() => {
+    setIsTransitioning(true);
 
-  const displayImages = colorFiltered.length > 0 ? colorFiltered : images;
+    const timer = setTimeout(() => {
+      const filtered = selectedColorId
+        ? images.filter((img) => img.colorId === selectedColorId || !img.colorId)
+        : images;
+      setActiveImages(filtered.length > 0 ? filtered : images);
+
+      const sharpenTimer = setTimeout(() => {
+        setIsTransitioning(false);
+      }, 180);
+
+      return () => clearTimeout(sharpenTimer);
+    }, 180);
+
+    return () => clearTimeout(timer);
+  }, [selectedColorId, images]);
 
   return (
     <>
       <div className="w-full flex flex-col space-y-4">
         {/* Gallery Stack */}
         <div className="grid grid-cols-1 gap-4">
-          {displayImages.map((img, idx) => (
+          {activeImages.map((img, idx) => (
             <div
               key={img.id || idx}
               className="relative aspect-[3/4] bg-ravetto-offwhite-paper border border-ravetto-border overflow-hidden group cursor-zoom-in select-none"
@@ -37,7 +53,9 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
                 src={img.url}
                 alt={img.alt || `${productName} - Plate 0${idx + 1}`}
                 loading={idx === 0 ? 'eager' : 'lazy'}
-                className="w-full h-full object-cover transition-all duration-400 ease-out group-hover:scale-[1.01]"
+                className={`w-full h-full object-cover transition-all duration-350 ease-out group-hover:scale-[1.01] ${
+                  isTransitioning ? 'opacity-40 blur-sm scale-[0.99]' : 'opacity-100 blur-0 scale-100'
+                }`}
               />
 
               {/* Angle Tag */}

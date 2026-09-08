@@ -31,16 +31,21 @@ export const SizeGuideDrawer: React.FC = () => {
     <Drawer
       isOpen={isSizeGuideOpen}
       onClose={closeSizeGuide}
-      title="Garment Sizing Architecture"
-      subtitle="Engineered for clean silhouette and drape"
+      title="FIND YOUR SIZE"
+      subtitle="Garment dimensions taken flat with zero tension"
       maxWidth="max-w-xl"
     >
-      <div className="space-y-6">
+      <div className="space-y-6 text-left">
         {/* Unit Switcher */}
         <div className="flex items-center justify-between">
-          <p className="text-xs text-ravetto-muted uppercase tracking-[0.14em]">
-            Measurements taken flat
-          </p>
+          <div className="space-y-0.5">
+            <span className="text-xs uppercase tracking-wider font-semibold text-ravetto-text block">
+              Reference Standards
+            </span>
+            <p className="text-[11px] text-ravetto-muted">
+              Model is 6'1" (185 cm) &bull; Wearing Size M
+            </p>
+          </div>
           <div className="inline-flex border border-ravetto-border">
             <button
               onClick={() => setUnit('inches')}
@@ -61,11 +66,15 @@ export const SizeGuideDrawer: React.FC = () => {
           </div>
         </div>
 
-        {/* Measurement Diagram Illustration */}
-        <div className="border border-ravetto-border bg-ravetto-offwhite-paper p-6 text-center">
+        {/* HOW TO MEASURE with clean T-shirt illustration */}
+        <div className="border border-ravetto-border bg-ravetto-offwhite-paper p-6 text-center space-y-3">
+          <span className="micro-caps text-ravetto-teal block">
+            HOW TO MEASURE
+          </span>
+
           <svg
-            viewBox="0 0 300 240"
-            className="w-56 h-44 mx-auto stroke-ravetto-text fill-none"
+            viewBox="0 0 300 230"
+            className="w-56 h-40 mx-auto stroke-ravetto-text fill-none"
             strokeWidth="1.2"
           >
             {/* T-Shirt Outline */}
@@ -75,6 +84,12 @@ export const SizeGuideDrawer: React.FC = () => {
             />
             {/* Collar Rib */}
             <path d="M120 40 Q150 62 180 40" strokeWidth="1" strokeDasharray="2,2" />
+
+            {/* Shoulder measurement line */}
+            <line x1="70" y1="58" x2="230" y2="58" stroke="#0D4F4A" strokeWidth="1.2" strokeDasharray="2,2" />
+            <text x="150" y="52" fill="#0D4F4A" fontSize="8" textAnchor="middle" fontFamily="monospace">
+              SHOULDER
+            </text>
 
             {/* Chest measurement line */}
             <line x1="95" y1="120" x2="205" y2="120" stroke="#0D4F4A" strokeWidth="1.5" strokeDasharray="3,3" />
@@ -89,11 +104,12 @@ export const SizeGuideDrawer: React.FC = () => {
             <circle cx="225" cy="40" r="2.5" fill="#0D4F4A" />
             <circle cx="225" cy="210" r="2.5" fill="#0D4F4A" />
             <text x="245" y="130" fill="#0D4F4A" fontSize="9" textAnchor="middle" fontFamily="monospace" transform="rotate(90, 245, 130)">
-              BODY LENGTH
+              LENGTH
             </text>
           </svg>
-          <p className="text-[11px] text-ravetto-muted mt-2">
-            For relaxed styling, order your standard size. For an intentional oversized drape, size up once.
+
+          <p className="text-[11px] text-ravetto-muted">
+            Lay your favorite-fitting garment flat on a level surface. Measure straight across chest 2.5cm below armhole.
           </p>
         </div>
 
@@ -103,10 +119,10 @@ export const SizeGuideDrawer: React.FC = () => {
             <thead className="bg-ravetto-offwhite-paper border-b border-ravetto-border text-[11px] uppercase tracking-[0.16em] text-ravetto-muted">
               <tr>
                 <th className="py-2.5 px-3.5 font-medium">Size</th>
-                <th className="py-2.5 px-3.5 font-medium">Chest ({unit})</th>
-                <th className="py-2.5 px-3.5 font-medium">Length ({unit})</th>
-                <th className="py-2.5 px-3.5 font-medium">Shoulder ({unit})</th>
-                <th className="py-2.5 px-3.5 font-medium">Sleeve ({unit})</th>
+                <th className="py-2.5 px-3.5 font-medium">CHEST ({unit})</th>
+                <th className="py-2.5 px-3.5 font-medium">LENGTH ({unit})</th>
+                <th className="py-2.5 px-3.5 font-medium">SHOULDER ({unit})</th>
+                <th className="py-2.5 px-3.5 font-medium">SLEEVE ({unit})</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-ravetto-border font-mono">
@@ -123,13 +139,13 @@ export const SizeGuideDrawer: React.FC = () => {
           </table>
         </div>
 
-        {/* Fit Assistance Note */}
+        {/* Atelier Guarantee */}
         <div className="p-4 bg-ravetto-mint-subtle border border-ravetto-mint text-ravetto-text text-xs space-y-1">
           <span className="font-semibold uppercase tracking-wider text-[10px] text-ravetto-teal block">
-            Atelier Recommendation
+            Pre-Shrunk Precision
           </span>
-          <p className="leading-relaxed">
-            All Ravetto garments are pre-shrunk through mechanical steam stabilization. Post-wash shrinkage is under 1.5% when washed cold.
+          <p className="leading-relaxed text-[11px] text-ravetto-muted">
+            All Ravetto cotton yardage undergoes vacuum steam stabilization prior to laser cutting. Post-wash shrinkage is guaranteed under 1.5% when washed cold.
           </p>
         </div>
       </div>

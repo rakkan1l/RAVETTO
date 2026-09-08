@@ -87,29 +87,26 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Signature Fabric Explorer (240 GSM Supima Macro Hotspots) */}
+      {/* 4. Signature Fabric Explorer (240 GSM Supima Macro Hotspots & Magnification) */}
       <FabricExplorer />
 
-      {/* 5. Craft Details in Focus */}
-      <CraftDetails />
-
-      {/* 6. The Ravetto Thread (Signature Storytelling Line) */}
+      {/* 5. The Ravetto Thread (7-Stage Brand Scroll Story) */}
       <RavettoThread />
 
-      {/* 7. Fit Architecture Explorer */}
-      <FitExplorer />
+      {/* 6. Craftsmanship Section (Macro Details: Collar, Stitch, Hem, Seams, Fabric, Label) */}
+      <CraftDetails />
+
+      {/* 7. Shop The Look (Editorial Campaign with Subtle Hotspots) */}
+      <ShopTheLook onNavigate={onNavigate} />
 
       {/* 8. Find Your Ravetto (Comparison Matrix) */}
       <FindYourRavetto onNavigate={onNavigate} />
 
-      {/* 9. Atelier Lookbook & Hotspots */}
-      <ShopTheLook onNavigate={onNavigate} />
-
-      {/* 10. Packaging Story ("Arrives as intended") */}
-      <PackagingStory />
-
-      {/* 11. Inside Ravetto (The 5 Disciplines) */}
+      {/* 9. Inside Ravetto (NOT JUST ANOTHER T-SHIRT.) */}
       <InsideRavetto />
+
+      {/* 10. Packaging Story (ARRIVES AS INTENDED.) */}
+      <PackagingStory />
     </div>
   );
 };

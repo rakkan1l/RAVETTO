@@ -152,12 +152,14 @@ export const AccountDashboardPage: React.FC<AccountDashboardPageProps> = ({ onNa
             ) : (
               /* Empty Orders State */
               <div className="py-20 text-center space-y-3 max-w-sm mx-auto">
-                <p className="font-editorial text-2xl text-ravetto-text">No Orders Yet.</p>
+                <p className="text-sm font-medium tracking-[0.2em] uppercase text-ravetto-text">
+                  NO ORDERS YET.
+                </p>
                 <p className="text-xs text-ravetto-muted">
                   Your Ravetto pieces will appear here after purchase.
                 </p>
                 <Button onClick={() => onNavigate('/shop')} variant="primary" size="md">
-                  Shop Ravetto
+                  Discover The Collection
                 </Button>
               </div>
             )}

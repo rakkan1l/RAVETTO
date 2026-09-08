@@ -16,20 +16,6 @@ export const SavedPiecesPage: React.FC<SavedPiecesPageProps> = ({ onNavigate }) 
     fetchSaved();
   }, [user]);
 
-  if (!user) {
-    return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6 space-y-4">
-        <h2 className="font-editorial text-3xl text-ravetto-text">Atelier Archive</h2>
-        <p className="text-xs text-ravetto-muted max-w-sm">
-          Please sign in to view your saved garments and personal curation.
-        </p>
-        <Button onClick={() => openAuthModal('login')} variant="primary" size="md">
-          Sign In to Account
-        </Button>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-ravetto-offwhite py-16 sm:py-24">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-12">
@@ -72,7 +58,7 @@ export const SavedPiecesPage: React.FC<SavedPiecesPageProps> = ({ onNavigate }) 
               </div>
               <div className="space-y-1">
                 <h3 className="text-sm font-medium tracking-[0.2em] uppercase text-ravetto-text">
-                  Nothing Saved Yet.
+                  NOTHING SAVED YET.
                 </h3>
                 <p className="text-xs text-ravetto-muted">
                   Pieces worth returning to will appear here.

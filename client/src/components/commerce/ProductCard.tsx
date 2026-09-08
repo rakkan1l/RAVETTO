@@ -52,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onNavigate })
           src={primaryImage?.url}
           alt={primaryImage?.alt || product.name}
           loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-350 ease-out ${
             isHovered && secondaryImage ? 'opacity-0' : 'opacity-100'
           }`}
         />
@@ -63,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onNavigate })
             src={secondaryImage.url}
             alt={secondaryImage.alt || product.name}
             loading="lazy"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out ${
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-350 ease-out ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
           />

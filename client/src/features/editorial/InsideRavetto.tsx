@@ -56,8 +56,8 @@ export const InsideRavetto: React.FC = () => {
           <span className="micro-caps text-ravetto-teal block">
             The Atelier Manifesto
           </span>
-          <h2 className="font-editorial text-3xl sm:text-5xl font-medium tracking-tight text-ravetto-text">
-            Not Just Another T-Shirt.
+          <h2 className="font-editorial text-3xl sm:text-5xl font-medium tracking-tight text-ravetto-text uppercase">
+            NOT JUST ANOTHER T-SHIRT.
           </h2>
           <p className="text-xs uppercase tracking-[0.18em] text-ravetto-muted">
             The five foundational disciplines of the Ravetto garment

@@ -4,30 +4,38 @@ export const CraftDetails: React.FC = () => {
   const craftPoints = [
     {
       number: '01',
-      title: 'REINFORCED DOUBLE-RIB COLLAR',
-      description:
-        'Engineered 1x1 high-density ribbed knit with internal elastomeric stabilization. Keeps the neckline crisp, flush against the neck, and completely resistant to rippling.',
+      title: 'REINFORCED COLLAR',
+      description: 'Designed to retain its shape.',
       image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85',
     },
     {
       number: '02',
-      title: 'PRECISION TWIN-NEEDLE STITCHING',
-      description:
-        'Evenly calibrated tension across all hems. Double-needle coverstitching spaced at 6mm gives elastic give during movement while preventing frayed edge curling.',
+      title: 'PRECISION STITCHING',
+      description: 'Clean construction with considered finishing.',
       image: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=800&q=85',
     },
     {
       number: '03',
-      title: 'HERRINGBONE SHOULDER TAPING',
-      description:
-        'Continuous interior tape runs from shoulder to shoulder behind the neck. It neutralizes gravity on hangers and preserves the architectural slope of the garment.',
+      title: 'STRUCTURED HEM',
+      description: 'Built for repeated wear.',
       image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=85',
     },
     {
       number: '04',
-      title: 'HEAT-PRESSED ATELIER STAMP',
-      description:
-        'Zero scratchy woven or polyester neck labels. Garment specifications and care protocols are applied via water-based micro-transfer inks directly to the inner cotton.',
+      title: 'REINFORCED SEAMS',
+      description: 'Bound flatlock interior seams without friction.',
+      image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=85',
+    },
+    {
+      number: '05',
+      title: 'DENSE FABRIC',
+      description: '240 GSM combed long-staple cotton knit.',
+      image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=800&q=85',
+    },
+    {
+      number: '06',
+      title: 'ATELIER LABEL',
+      description: 'Zero-friction heat-pressed interior stamp.',
       image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=85',
     },
   ];
@@ -50,8 +58,8 @@ export const CraftDetails: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Editorial Modules */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-16">
+        {/* 6 Editorial Modules */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-16">
           {craftPoints.map((point) => (
             <div key={point.number} className="flex flex-col text-left space-y-4 group">
               <div className="relative aspect-[4/5] bg-ravetto-offwhite-paper overflow-hidden">

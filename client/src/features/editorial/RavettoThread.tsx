@@ -1,50 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export const RavettoThread: React.FC = () => {
-  const [activeStep, setActiveStep] = useState(2);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const steps = [
+  const stages = [
     {
       id: 0,
       title: 'MATERIAL',
-      spec: '100% Combed Supima',
+      spec: '100% Combed Supima Cotton',
       desc: 'Single-origin extra long staple fibers selected for natural tensile strength and velvet hand.',
     },
     {
       id: 1,
-      title: 'FIT',
-      spec: 'Architectural Balance',
-      desc: 'Formulated with precise chest-to-shoulder ratio that drapes cleanly without body cling.',
+      title: 'WEIGHT',
+      spec: '240–280 GSM Density',
+      desc: 'Calibrated weight that drapes away from the body without clinging or sheer transparency.',
     },
     {
       id: 2,
-      title: 'CUT',
-      spec: 'Laser Pattern Geometry',
-      desc: 'Patterned along the true warp grain of the fabric to guarantee zero helical seam twisting.',
+      title: 'FIT',
+      spec: 'Architectural Balance',
+      desc: 'Formulated with precise chest-to-shoulder ratios for clean vertical silhouette geometry.',
     },
     {
       id: 3,
+      title: 'CUT',
+      spec: 'Laser Grain Geometry',
+      desc: 'Patterned along the true warp grain of the cotton knit to prevent helical seam twisting.',
+    },
+    {
+      id: 4,
       title: 'STITCH',
       spec: 'Twin-Needle Tension',
       desc: 'Precision 6mm coverstitching and internal herringbone tape maintaining shape forever.',
     },
     {
-      id: 4,
+      id: 5,
       title: 'FINISH',
-      spec: 'Mechanical Pre-Shrunk',
+      spec: 'Mechanical Steam Stabilized',
       desc: 'Bio-polished with plant enzymes for zero surface fuzz and permanent color fastness.',
     },
     {
-      id: 5,
+      id: 6,
       title: 'RAVETTO',
       spec: 'Quiet Confidence',
       desc: 'A permanent foundational uniform worn without effort, day after day.',
     },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate progress between when section enters top half of screen and exits
+      const start = windowHeight * 0.7;
+      const end = -rect.height + windowHeight * 0.3;
+      const current = rect.top;
+
+      const progress = Math.min(Math.max((start - current) / (start - end), 0), 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const activeStageIndex = Math.min(
+    stages.length - 1,
+    Math.floor(scrollProgress * stages.length)
+  );
+
   return (
-    <section className="py-28 sm:py-36 bg-ravetto-teal text-white border-b border-ravetto-teal-dark overflow-hidden relative">
+    <section
+      ref={sectionRef}
+      className="py-28 sm:py-36 bg-ravetto-teal text-white border-b border-ravetto-teal-dark overflow-hidden relative"
+    >
       <div className="max-w-[1200px] mx-auto px-6 sm:px-12 relative z-10">
         {/* Intro */}
         <div className="text-center max-w-xl mx-auto mb-20 space-y-3">
@@ -54,35 +89,34 @@ export const RavettoThread: React.FC = () => {
           <h2 className="font-editorial text-3xl sm:text-5xl font-medium tracking-tight text-white">
             The Ravetto Thread
           </h2>
-          <p className="text-xs uppercase tracking-[0.2em] text-white/70">
-            From single fiber to finished silhouette
+          <p className="text-xs uppercase tracking-[0.2em] text-white/70 font-mono">
+            Scroll to follow the line of craft
           </p>
         </div>
 
         {/* Story Thread Architecture */}
         <div className="relative max-w-2xl mx-auto">
-          {/* Vertical Connecting Line */}
+          {/* Subtle Background Guide Line */}
           <div className="absolute top-4 bottom-4 left-6 sm:left-1/2 sm:-translate-x-1/2 w-px bg-white/20 z-0" />
-          {/* Active indicator line */}
+
+          {/* Thin Deep Teal / Mint Drawing Line */}
           <motion.div
-            className="absolute top-4 left-6 sm:left-1/2 sm:-translate-x-1/2 w-px bg-ravetto-mint z-0"
-            animate={{
-              height: `${(activeStep / (steps.length - 1)) * 100}%`,
+            className="absolute top-4 left-6 sm:left-1/2 sm:-translate-x-1/2 w-[2px] bg-ravetto-mint z-0 origin-top"
+            style={{
+              height: `${scrollProgress * 95}%`,
             }}
-            transition={{ duration: 0.4 }}
           />
 
-          {/* Steps */}
+          {/* Stages */}
           <div className="space-y-12 sm:space-y-16 relative z-10">
-            {steps.map((step, idx) => {
-              const isActive = activeStep === idx;
-              const isPast = idx <= activeStep;
+            {stages.map((stage, idx) => {
+              const isPassed = idx <= activeStageIndex;
+              const isCurrent = idx === activeStageIndex;
 
               return (
                 <div
-                  key={step.id}
-                  onClick={() => setActiveStep(idx)}
-                  className={`flex items-start cursor-pointer transition-all duration-300 ${
+                  key={stage.id}
+                  className={`flex items-start transition-all duration-300 ${
                     idx % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
                   }`}
                 >
@@ -93,32 +127,44 @@ export const RavettoThread: React.FC = () => {
                     } text-left`}
                   >
                     <span
-                      className={`text-[11px] font-mono tracking-[0.2em] uppercase block transition-colors ${
-                        isActive ? 'text-ravetto-mint font-semibold' : 'text-white/60'
+                      className={`text-[11px] font-mono tracking-[0.2em] uppercase block transition-colors duration-300 ${
+                        isCurrent
+                          ? 'text-ravetto-mint font-bold'
+                          : isPassed
+                          ? 'text-white'
+                          : 'text-white/40'
                       }`}
                     >
-                      {step.title}
+                      {stage.title}
                     </span>
-                    <h3 className="text-sm uppercase tracking-wider font-medium text-white mt-0.5">
-                      {step.spec}
+                    <h3
+                      className={`text-sm uppercase tracking-wider font-medium mt-0.5 transition-colors ${
+                        isPassed ? 'text-white' : 'text-white/40'
+                      }`}
+                    >
+                      {stage.spec}
                     </h3>
-                    <p className="text-xs text-white/75 mt-1.5 leading-relaxed font-sans max-w-xs">
-                      {step.desc}
+                    <p
+                      className={`text-xs mt-1.5 leading-relaxed font-sans max-w-xs transition-colors ${
+                        isPassed ? 'text-white/80' : 'text-white/30'
+                      }`}
+                    >
+                      {stage.desc}
                     </p>
                   </div>
 
-                  {/* Bullet Node */}
+                  {/* Minimal Bullet Node - No glow, no neon */}
                   <div className="absolute left-6 sm:left-1/2 -translate-x-1/2 mt-1">
                     <div
-                      className={`w-4 h-4 rounded-full transition-all duration-300 flex items-center justify-center ${
-                        isActive
-                          ? 'bg-ravetto-mint ring-4 ring-ravetto-mint/30 scale-125'
-                          : isPast
+                      className={`w-3.5 h-3.5 rounded-full transition-all duration-300 flex items-center justify-center ${
+                        isCurrent
+                          ? 'bg-ravetto-mint scale-125'
+                          : isPassed
                           ? 'bg-white'
-                          : 'bg-ravetto-teal-dark border border-white/40'
+                          : 'bg-ravetto-teal-dark border border-white/30'
                       }`}
                     >
-                      {isActive && <div className="w-1.5 h-1.5 rounded-full bg-ravetto-teal" />}
+                      {isCurrent && <div className="w-1.5 h-1.5 rounded-full bg-ravetto-teal" />}
                     </div>
                   </div>
                 </div>
@@ -128,9 +174,9 @@ export const RavettoThread: React.FC = () => {
         </div>
 
         {/* Concluding Statement */}
-        <div className="text-center pt-20 border-t border-white/10 mt-20 space-y-2">
+        <div className="text-center pt-24 border-t border-white/15 mt-20 space-y-2">
           <p className="font-editorial text-2xl sm:text-4xl font-medium tracking-tight text-white">
-            Every detail has a purpose.
+            EVERY DETAIL HAS A PURPOSE.
           </p>
           <p className="text-xs uppercase tracking-[0.2em] text-ravetto-mint/90 font-mono">
             RAVETTO ATELIER &bull; TIRUPPUR, INDIA

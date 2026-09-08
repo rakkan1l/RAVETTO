@@ -20,28 +20,37 @@ export const PackagingStory: React.FC = () => {
           {/* Copy */}
           <div className="lg:col-span-5 space-y-6 text-left">
             <span className="micro-caps text-ravetto-teal block">
-              Beyond Checkout
+              Packaging Architecture
             </span>
-            <h2 className="font-editorial text-3xl sm:text-5xl font-medium tracking-tight text-ravetto-text">
-              Arrives as intended.
+            <h2 className="font-editorial text-3xl sm:text-5xl font-medium tracking-tight text-ravetto-text uppercase">
+              ARRIVES AS INTENDED.
             </h2>
             <p className="text-xs sm:text-sm text-ravetto-muted leading-relaxed font-sans">
-              The tactile experience of luxury begins the moment your parcel is delivered. Each garment is steam-pressed at the atelier, folded inside acid-free tissue wrap, and secured within a rigid kraft shipping box.
+              The tactile experience of luxury begins the moment your parcel is delivered. Every order is prepared with deliberate restraint using recyclable materials.
             </p>
 
-            <div className="space-y-4 pt-4 border-t border-ravetto-border text-xs text-ravetto-muted">
-              <div className="flex items-start space-x-3">
-                <span className="font-mono text-ravetto-teal font-semibold text-xs">01</span>
-                <span>Rigid post-consumer recycled mailer box engineered against crush deformation.</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <span className="font-mono text-ravetto-teal font-semibold text-xs">02</span>
-                <span>Zero plastic single-use polybags. Uncoated paper garment seal only.</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <span className="font-mono text-ravetto-teal font-semibold text-xs">03</span>
-                <span>Hand-numbered atelier inspection card confirming knit tension check.</span>
-              </div>
+            <div className="space-y-3 pt-4 border-t border-ravetto-border text-xs">
+              {[
+                { name: 'Ravetto Box', desc: 'Custom rigid kraft box engineered against crush deformation.' },
+                { name: 'Garment', desc: 'Steam-pressed and precision-folded at the atelier.' },
+                { name: 'Tissue', desc: 'Acid-free unbleached tissue wrap with subtle embossing.' },
+                { name: 'Hang Tag', desc: 'Heavyweight FSC paper tag with natural cotton cord.' },
+                { name: 'Thank-You Card', desc: 'Hand-numbered inspector card with garment lot details.' },
+              ].map((item, idx) => (
+                <div key={item.name} className="flex items-start space-x-3 py-1 border-b border-ravetto-border/40 last:border-b-0">
+                  <span className="font-mono text-ravetto-teal font-semibold text-xs min-w-[20px]">
+                    0{idx + 1}
+                  </span>
+                  <div className="space-y-0.5">
+                    <span className="font-medium uppercase tracking-wider text-ravetto-text text-[11px] block">
+                      {item.name}
+                    </span>
+                    <span className="text-ravetto-muted text-xs block">
+                      {item.desc}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

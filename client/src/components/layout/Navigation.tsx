@@ -13,6 +13,7 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isShopMegaOpen, setIsShopMegaOpen] = useState(false);
   const { cart, toggleCart } = useCartStore();
   const { savedItems } = useSavedStore();
   const { user, openAuthModal } = useAuthStore();
@@ -36,14 +37,81 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate 
             </button>
 
             <nav className="hidden lg:flex items-center space-x-7 text-xs uppercase tracking-[0.18em] font-medium">
-              <button
-                onClick={() => onNavigate('/shop')}
-                className={`transition-colors py-1 ${
-                  currentPath === '/shop' ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
-                }`}
+              {/* Shop with Editorial Mega Menu */}
+              <div
+                className="relative group"
+                onMouseEnter={() => setIsShopMegaOpen(true)}
+                onMouseLeave={() => setIsShopMegaOpen(false)}
               >
-                Shop
-              </button>
+                <button
+                  onClick={() => onNavigate('/shop')}
+                  className={`transition-colors py-1 flex items-center space-x-1 ${
+                    currentPath === '/shop' ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
+                  }`}
+                >
+                  <span>Shop</span>
+                </button>
+
+                {/* Editorial Mega Menu Dropdown */}
+                {isShopMegaOpen && (
+                  <div className="absolute top-full left-0 w-[580px] bg-ravetto-offwhite border border-ravetto-border shadow-2xl p-8 z-50 animate-fadeIn">
+                    <div className="grid grid-cols-12 gap-8 items-center">
+                      {/* Left: Collections Links */}
+                      <div className="col-span-6 space-y-4 text-left">
+                        <span className="text-[10px] uppercase font-mono tracking-[0.22em] text-ravetto-teal font-bold block">
+                          Collections
+                        </span>
+                        <div className="space-y-3">
+                          {[
+                            { name: 'NEW ARRIVALS', path: '/shop?filter=new' },
+                            { name: 'ESSENTIAL TEES', path: '/collections/essentials' },
+                            { name: 'HEAVYWEIGHT', path: '/shop?filter=heavyweight' },
+                            { name: 'RELAXED FIT', path: '/shop?filter=relaxed' },
+                            { name: 'SHOP ALL', path: '/shop' },
+                          ].map((item) => (
+                            <button
+                              key={item.name}
+                              onClick={() => {
+                                setIsShopMegaOpen(false);
+                                onNavigate(item.path);
+                              }}
+                              className="block text-xs uppercase tracking-[0.16em] font-medium text-ravetto-text hover:text-ravetto-teal hover:translate-x-1 transition-all"
+                            >
+                              {item.name}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Right: Large Editorial Campaign Imagery */}
+                      <div
+                        onClick={() => {
+                          setIsShopMegaOpen(false);
+                          onNavigate('/shop');
+                        }}
+                        className="col-span-6 cursor-pointer group/card overflow-hidden"
+                      >
+                        <div className="relative aspect-[4/5] bg-ravetto-offwhite-paper overflow-hidden">
+                          <img
+                            src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85"
+                            alt="Ravetto Editorial Campaign"
+                            className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 ease-out"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-ravetto-text/70 via-transparent to-transparent opacity-80" />
+                          <div className="absolute bottom-3 left-3 right-3 text-left">
+                            <span className="text-[9px] uppercase font-mono tracking-widest text-white/80 block">
+                              SS26 Campaign
+                            </span>
+                            <span className="font-editorial text-xs font-medium text-white block">
+                              Timeless Proportions
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
               <button
                 onClick={() => onNavigate('/collections')}
                 className={`transition-colors py-1 ${

@@ -19,7 +19,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
     <Drawer
       isOpen={isOpen}
       onClose={closeCart}
-      title="Your Bag"
+      title="YOUR BAG"
       subtitle={cart ? `[${cart.itemCount} ${cart.itemCount === 1 ? 'Piece' : 'Pieces'}]` : ''}
       maxWidth="max-w-md"
     >
@@ -31,10 +31,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
           </div>
           <div className="space-y-1.5">
             <h3 className="text-sm font-medium tracking-[0.2em] uppercase text-ravetto-text">
-              Your Bag is Quiet.
+              YOUR BAG IS QUIET.
             </h3>
             <p className="text-xs text-ravetto-muted max-w-xs">
-              Pieces chosen with intention will rest here until you are ready.
+              Discover the collection.
             </p>
           </div>
           <Button
@@ -45,7 +45,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
             variant="primary"
             size="md"
           >
-            Shop Ravetto
+            Discover the Collection
           </Button>
         </div>
       ) : (
@@ -55,17 +55,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
           <div className="pb-5 border-b border-ravetto-border">
             <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.14em] font-medium mb-2 text-ravetto-text">
               <span className="flex items-center space-x-1.5">
-                {cart.isFreeShipping && <Sparkles className="w-3.5 h-3.5 text-ravetto-teal" />}
                 <span>
                   {cart.isFreeShipping
-                    ? 'Complimentary Shipping Unlocked'
-                    : `₹${cart.amountNeededForFreeShipping.toLocaleString('en-IN')} Away From Complimentary Shipping`}
+                    ? 'COMPLIMENTARY SHIPPING UNLOCKED'
+                    : `₹${cart.amountNeededForFreeShipping.toLocaleString('en-IN')} AWAY FROM COMPLIMENTARY SHIPPING`}
                 </span>
               </span>
-              <span className="font-mono">{cart.freeShippingProgress}%</span>
+              <span className="font-mono text-[10px] text-ravetto-muted">{cart.freeShippingProgress}%</span>
             </div>
             {/* Progress Bar */}
-            <div className="w-full h-1 bg-ravetto-border/60 overflow-hidden">
+            <div className="w-full h-[2px] bg-ravetto-border/60 overflow-hidden">
               <div
                 className="h-full bg-ravetto-teal transition-all duration-500 ease-out"
                 style={{ width: `${cart.freeShippingProgress}%` }}
@@ -174,9 +173,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
               }}
               variant="primary"
               size="lg"
-              className="w-full"
+              className="w-full uppercase tracking-[0.16em] text-xs"
             >
-              Proceed to Checkout
+              Checkout &bull; ₹{cart.total.toLocaleString('en-IN')}
             </Button>
           </div>
         </div>

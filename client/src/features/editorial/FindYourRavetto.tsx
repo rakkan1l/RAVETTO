@@ -87,9 +87,10 @@ export const FindYourRavetto: React.FC<FindYourRavettoProps> = ({ onNavigate }) 
               </tr>
             </thead>
             <tbody className="divide-y divide-ravetto-border text-xs">
+              {/* GSM */}
               <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors">
-                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted">
-                  GSM (Weight)
+                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted font-semibold">
+                  GSM
                 </td>
                 {comparison.map((item) => (
                   <td key={item.slug} className="p-4 sm:p-5 font-mono font-bold text-ravetto-teal">
@@ -98,9 +99,10 @@ export const FindYourRavetto: React.FC<FindYourRavettoProps> = ({ onNavigate }) 
                 ))}
               </tr>
 
+              {/* FIT */}
               <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors">
-                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted">
-                  Silhouette / Fit
+                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted font-semibold">
+                  FIT
                 </td>
                 {comparison.map((item) => (
                   <td key={item.slug} className="p-4 sm:p-5 font-medium text-ravetto-text">
@@ -109,9 +111,22 @@ export const FindYourRavetto: React.FC<FindYourRavettoProps> = ({ onNavigate }) 
                 ))}
               </tr>
 
+              {/* WEIGHT */}
               <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors">
-                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted">
-                  Tactile Feel
+                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted font-semibold">
+                  WEIGHT
+                </td>
+                {comparison.map((item) => (
+                  <td key={item.slug} className="p-4 sm:p-5 text-ravetto-text">
+                    {item.weight}
+                  </td>
+                ))}
+              </tr>
+
+              {/* FEEL */}
+              <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors">
+                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted font-semibold">
+                  FEEL
                 </td>
                 {comparison.map((item) => (
                   <td key={item.slug} className="p-4 sm:p-5 text-ravetto-muted">
@@ -120,35 +135,26 @@ export const FindYourRavetto: React.FC<FindYourRavettoProps> = ({ onNavigate }) 
                 ))}
               </tr>
 
+              {/* STRUCTURE */}
               <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors">
-                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted">
-                  Neck Construction
+                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted font-semibold">
+                  STRUCTURE
                 </td>
                 {comparison.map((item) => (
                   <td key={item.slug} className="p-4 sm:p-5 text-ravetto-text">
-                    {item.neck}
+                    {item.structure}
                   </td>
                 ))}
               </tr>
 
+              {/* BEST FOR */}
               <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors">
-                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted">
-                  Primary Best Use
+                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted font-semibold">
+                  BEST FOR
                 </td>
                 {comparison.map((item) => (
                   <td key={item.slug} className="p-4 sm:p-5 text-ravetto-muted">
                     {item.bestUse}
-                  </td>
-                ))}
-              </tr>
-
-              <tr className="hover:bg-ravetto-offwhite-paper/50 transition-colors bg-ravetto-offwhite-paper/30">
-                <td className="p-4 sm:p-5 font-mono text-[11px] uppercase tracking-wider text-ravetto-muted">
-                  Atelier Price
-                </td>
-                {comparison.map((item) => (
-                  <td key={item.slug} className="p-4 sm:p-5 font-medium text-ravetto-text">
-                    {item.price}
                   </td>
                 ))}
               </tr>

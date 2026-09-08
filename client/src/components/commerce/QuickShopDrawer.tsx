@@ -172,9 +172,9 @@ export const QuickShopDrawer: React.FC<QuickShopDrawerProps> = ({ onNavigate }) 
             isLoading={isLoading}
             variant="primary"
             size="md"
-            className="w-full"
+            className="w-full uppercase tracking-[0.16em] text-xs"
           >
-            Add to Bag &bull; ₹{(quickShopProduct.price * quantity).toLocaleString('en-IN')}
+            ADD TO BAG &bull; ₹{(quickShopProduct.price * quantity).toLocaleString('en-IN')}
           </Button>
 
           <button
@@ -185,7 +185,7 @@ export const QuickShopDrawer: React.FC<QuickShopDrawerProps> = ({ onNavigate }) 
             }}
             className="w-full py-2.5 text-[11px] uppercase tracking-[0.16em] font-medium text-ravetto-muted hover:text-ravetto-text text-center transition-colors"
           >
-            View Full Garment Story &rarr;
+            VIEW FULL DETAILS
           </button>
         </div>
       </div>

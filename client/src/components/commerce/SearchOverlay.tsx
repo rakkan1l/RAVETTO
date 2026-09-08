@@ -112,22 +112,71 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
                 </button>
               </div>
 
-              {/* Suggestions / Popular Searches */}
+              {/* Suggestions / Collections / Recent Searches */}
               {!query.trim() && (
-                <div className="p-6 sm:p-8 space-y-4">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ravetto-muted block">
-                    Popular Queries
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {popularTerms.map((term) => (
-                      <button
-                        key={term}
-                        onClick={() => setQuery(term)}
-                        className="px-3 py-1.5 border border-ravetto-border text-xs uppercase tracking-wider text-ravetto-text hover:border-ravetto-teal hover:text-ravetto-teal transition-colors"
-                      >
-                        {term}
-                      </button>
-                    ))}
+                <div className="p-6 sm:p-8 space-y-6 text-left">
+                  {/* Collections */}
+                  <div className="space-y-3">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ravetto-teal block">
+                      Collections
+                    </span>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {[
+                        { label: 'Essential 240 GSM', path: '/collections/essentials' },
+                        { label: 'Heavyweight 280 GSM', path: '/shop?filter=heavyweight' },
+                        { label: 'Architectural Cuts', path: '/materials' },
+                        { label: 'Full Collection', path: '/shop' },
+                      ].map((col) => (
+                        <button
+                          key={col.label}
+                          onClick={() => {
+                            closeSearch();
+                            onNavigate(col.path);
+                          }}
+                          className="p-2.5 border border-ravetto-border text-left hover:border-ravetto-teal hover:bg-ravetto-offwhite-paper transition-all"
+                        >
+                          <span className="block text-[11px] font-medium uppercase tracking-wider text-ravetto-text">
+                            {col.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Popular Searches */}
+                  <div className="space-y-2.5 pt-2 border-t border-ravetto-border/60">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ravetto-muted block">
+                      Popular Searches
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {popularTerms.map((term) => (
+                        <button
+                          key={term}
+                          onClick={() => setQuery(term)}
+                          className="px-3 py-1.5 border border-ravetto-border text-xs uppercase tracking-wider text-ravetto-text hover:border-ravetto-teal hover:text-ravetto-teal transition-colors"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recent Searches */}
+                  <div className="space-y-2 pt-2 border-t border-ravetto-border/60">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ravetto-muted block">
+                      Recent Searches
+                    </span>
+                    <div className="flex flex-wrap gap-2 text-xs text-ravetto-muted">
+                      {['Heavyweight Oversized', 'Deep Teal M', '240 GSM'].map((r) => (
+                        <button
+                          key={r}
+                          onClick={() => setQuery(r)}
+                          className="hover:text-ravetto-teal underline transition-colors"
+                        >
+                          {r}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
@@ -179,7 +228,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
                     /* Empty Search State */
                     <div className="py-12 text-center space-y-2">
                       <p className="text-xs uppercase tracking-[0.2em] font-medium text-ravetto-text">
-                        Nothing Found.
+                        NOTHING FOUND.
                       </p>
                       <p className="text-xs text-ravetto-muted">
                         Try another phrase or explore the collection.
