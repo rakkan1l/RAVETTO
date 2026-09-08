@@ -1,0 +1,154 @@
+// ==========================================
+// RAVETTO SASS ARCHITECTURE (atelier.scss)
+// ==========================================
+
+$color-offwhite: #F5F4EF;
+$color-offwhite-paper: #EFECE4;
+$color-teal: #0D4F4A;
+$color-teal-dark: #083834;
+$color-teal-light: #14645E;
+$color-mint: #B8E0D2;
+$color-mint-subtle: #EAF6F2;
+$color-text: #172B2A;
+$color-muted: #617371;
+$color-border: #E2DFD6;
+
+$font-primary: 'Figtree', 'Red Hat Display', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-editorial: 'Playfair Display', Georgia, serif;
+$font-mono: 'JetBrains Mono', monospace;
+
+// SASS Mixins
+@mixin hairline-border($edge: all) {
+  @if $edge == all {
+    border: 1px solid $color-border;
+  } @else if $edge == top {
+    border-top: 1px solid $color-border;
+  } @else if $edge == bottom {
+    border-bottom: 1px solid $color-border;
+  } @else if $edge == left {
+    border-left: 1px solid $color-border;
+  } @else if $edge == right {
+    border-right: 1px solid $color-border;
+  }
+}
+
+@mixin micro-type($spacing: 0.2em) {
+  font-family: $font-primary;
+  text-transform: uppercase;
+  letter-spacing: $spacing;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+// Swiper Custom Atelier Overrides
+.swiper {
+  width: 100%;
+  height: 100%;
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s ease;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: $color-teal;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid $color-border;
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+
+    &:after {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background: $color-teal;
+      color: #fff;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    background: $color-muted;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+
+    &-active {
+      background: $color-teal;
+      opacity: 1;
+      width: 18px;
+      border-radius: 4px;
+    }
+  }
+}
+
+// Odometer Styles & Digit Wheels
+.odometer.odometer-auto-theme,
+.odometer.odometer-theme-minimal {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  font-family: inherit;
+
+  .odometer-digit {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+
+    .odometer-digit-spacer {
+      display: inline-block;
+      vertical-align: middle;
+      visibility: hidden;
+    }
+
+    .odometer-digit-inner {
+      text-align: left;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+
+      .odometer-ribbon {
+        display: block;
+
+        .odometer-ribbon-inner {
+          display: block;
+          backface-visibility: hidden;
+
+          .odometer-value {
+            display: block;
+            transform: translateZ(0);
+
+            &.odometer-last-value {
+              position: absolute;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Icon helper classes integrating Font Awesome & Icomoon
+.atelier-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  &.fa,
+  &.fas,
+  &.far,
+  &.fab {
+    font-size: 0.875rem;
+  }
+}

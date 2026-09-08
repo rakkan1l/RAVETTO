@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { OdometerCounter } from '../../components/ui/OdometerCounter';
 
 export const FabricExplorer: React.FC = () => {
   const [activeHotspot, setActiveHotspot] = useState<number>(0);
@@ -69,19 +70,29 @@ export const FabricExplorer: React.FC = () => {
           <h2 className="font-editorial text-3xl sm:text-5xl font-medium tracking-tight text-ravetto-text">
             Fabric Explorer
           </h2>
-          <p className="text-xs uppercase tracking-[0.2em] text-ravetto-muted font-mono">
-            240 GSM &bull; 100% Premium Cotton
-          </p>
+          <div className="flex items-center justify-center space-x-2 text-xs uppercase tracking-[0.2em] text-ravetto-muted font-mono">
+            <OdometerCounter value={240} suffix="GSM" className="text-ravetto-teal font-bold" />
+            <span>&bull;</span>
+            <span>100% Premium Cotton</span>
+          </div>
         </div>
 
-        {/* Feature Highlights Pills */}
+        {/* Feature Highlights Pills with Font Awesome Icons */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
-          {['240 GSM', '100% Premium Cotton', 'Dense Knit', 'Soft Hand Feel', 'Breathable Construction', 'Pre-Shrunk Finish'].map((tag) => (
+          {[
+            { label: '240 GSM', icon: 'fa-solid fa-scale-balanced' },
+            { label: '100% Premium Cotton', icon: 'fa-solid fa-leaf' },
+            { label: 'Dense Knit', icon: 'fa-solid fa-layer-group' },
+            { label: 'Soft Hand Feel', icon: 'fa-solid fa-feather' },
+            { label: 'Breathable Construction', icon: 'fa-solid fa-wind' },
+            { label: 'Pre-Shrunk Finish', icon: 'fa-solid fa-shield-halved' },
+          ].map((tag) => (
             <span
-              key={tag}
-              className="px-3 py-1 bg-ravetto-offwhite border border-ravetto-border text-[10px] sm:text-[11px] uppercase tracking-[0.16em] font-medium text-ravetto-text"
+              key={tag.label}
+              className="px-3 py-1 bg-ravetto-offwhite border border-ravetto-border text-[10px] sm:text-[11px] uppercase tracking-[0.16em] font-medium text-ravetto-text inline-flex items-center"
             >
-              {tag}
+              <i className={`${tag.icon} mr-1.5 text-ravetto-teal text-[10px]`}></i>
+              {tag.label}
             </span>
           ))}
         </div>

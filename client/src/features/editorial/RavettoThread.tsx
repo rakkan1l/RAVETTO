@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export const RavettoThread: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
 
   const stages = [
     {
@@ -51,23 +58,24 @@ export const RavettoThread: React.FC = () => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (!sectionRef.current) return;
 
-      // Calculate progress between when section enters top half of screen and exits
-      const start = windowHeight * 0.7;
-      const end = -rect.height + windowHeight * 0.3;
-      const current = rect.top;
+    const trigger = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: 'top 75%',
+      end: 'bottom 40%',
+      scrub: 0.5,
+      onUpdate: (self) => {
+        setScrollProgress(self.progress);
+        if (lineRef.current) {
+          gsap.set(lineRef.current, { height: `${self.progress * 95}%` });
+        }
+      },
+    });
 
-      const progress = Math.min(Math.max((start - current) / (start - end), 0), 1);
-      setScrollProgress(progress);
+    return () => {
+      trigger.kill();
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const activeStageIndex = Math.min(
@@ -101,6 +109,7 @@ export const RavettoThread: React.FC = () => {
 
           {/* Thin Deep Teal / Mint Drawing Line */}
           <motion.div
+            ref={lineRef}
             className="absolute top-4 left-6 sm:left-1/2 sm:-translate-x-1/2 w-[2px] bg-ravetto-mint z-0 origin-top"
             style={{
               height: `${scrollProgress * 95}%`,

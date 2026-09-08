@@ -24,7 +24,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Red Hat Display"', '"Poppins"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Figtree"', '"Red Hat Display"', '"Poppins"', 'system-ui', '-apple-system', 'sans-serif'],
+        figtree: ['"Figtree"', 'sans-serif'],
         redhat: ['"Red Hat Display"', 'sans-serif'],
         poppins: ['"Poppins"', 'sans-serif'],
         editorial: ['"Playfair Display"', 'Georgia', 'serif'],

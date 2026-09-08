@@ -144,8 +144,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-ravetto-muted uppercase tracking-[0.16em] space-y-4 sm:space-y-0">
-          <div>
-            &copy; {new Date().getFullYear()} RAVETTO ATELIER. All rights reserved.
+          <div className="flex items-center space-x-4">
+            <span>&copy; {new Date().getFullYear()} RAVETTO ATELIER. All rights reserved.</span>
+            <span className="hidden sm:inline text-ravetto-border">|</span>
+            {/* Font Awesome Social Icons */}
+            <div className="flex items-center space-x-3 text-xs text-ravetto-muted">
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-ravetto-teal transition-colors">
+                <i className="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)" className="hover:text-ravetto-teal transition-colors">
+                <i className="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="https://pinterest.com" target="_blank" rel="noreferrer" aria-label="Pinterest" className="hover:text-ravetto-teal transition-colors">
+                <i className="fa-brands fa-pinterest-p"></i>
+              </a>
+            </div>
           </div>
           <div className="flex items-center space-x-6">
             <button onClick={() => onNavigate('/shipping')} className="hover:text-ravetto-teal transition-colors">
