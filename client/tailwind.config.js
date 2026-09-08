@@ -24,7 +24,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Red Hat Display"', '"Poppins"', 'system-ui', '-apple-system', 'sans-serif'],
+        redhat: ['"Red Hat Display"', 'sans-serif'],
+        poppins: ['"Poppins"', 'sans-serif'],
         editorial: ['"Playfair Display"', 'Georgia', 'serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
