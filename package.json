@@ -1,0 +1,27 @@
+{
+  "name": "ravetto",
+  "version": "1.0.0",
+  "description": "RAVETTO — Premium DTC Fashion E-Commerce Platform",
+  "scripts": {
+    "dev:server": "cd server && npx tsx src/server.ts",
+    "dev:client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "build": "npm run build:server && npm run build:client",
+    "db:push": "cd server && npx prisma db push",
+    "db:seed": "cd server && npx tsx prisma/seed.ts"
+  },
+  "keywords": [
+    "ravetto",
+    "luxury",
+    "fashion",
+    "ecommerce",
+    "dtc",
+    "t-shirts"
+  ],
+  "author": "Ravetto Atelier",
+  "license": "ISC",
+  "devDependencies": {
+    "isomorphic-git": "^1.41.9"
+  }
+}

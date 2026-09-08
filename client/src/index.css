@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,300..700;1,300..700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-offwhite: #F5F4EF;
+  --color-offwhite-paper: #EFECE4;
+  --color-teal: #0D4F4A;
+  --color-teal-dark: #083834;
+  --color-teal-light: #14645E;
+  --color-mint: #B8E0D2;
+  --color-mint-subtle: #EAF6F2;
+  --color-text: #172B2A;
+  --color-border: #E2DFD6;
+}
+
+body {
+  background-color: var(--color-offwhite);
+  color: var(--color-text);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* Luxury Editorial Headings */
+.font-editorial {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Micro Typography Tokens */
+.micro-caps {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.6875rem; /* 11px */
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.editorial-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem; /* 12px */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Architectural 1px hairline borders */
+.border-hairline {
+  border-width: 1px;
+  border-color: var(--color-border);
+}
+
+.border-hairline-t {
+  border-top-width: 1px;
+  border-top-color: var(--color-border);
+}
+
+.border-hairline-b {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--color-border);
+}
+
+/* Refined Subtle Transitions */
+.transition-editorial {
+  transition-property: all;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.transition-micro {
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F4EF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D5D1C6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0D4F4A;
+}
+
+/* Smooth Image Loading Blur State */
+.img-loading {
+  filter: blur(10px);
+  opacity: 0.7;
+  transition: filter 400ms ease, opacity 400ms ease;
+}
+
+.img-loaded {
+  filter: blur(0);
+  opacity: 1;
+  transition: filter 400ms ease, opacity 400ms ease;
+}
+
+/* Focus Outlines for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+}
