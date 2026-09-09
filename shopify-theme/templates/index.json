@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-editorial",
+      "settings": {
+        "heading": "DESIGNED FOR EVERY DAY.<br>MADE BEYOND ORDINARY."
+      }
+    },
+    "fabric_explorer": {
+      "type": "fabric-explorer",
+      "settings": {}
+    },
+    "ravetto_thread": {
+      "type": "ravetto-thread",
+      "settings": {}
+    },
+    "craft_details": {
+      "type": "craft-details",
+      "settings": {}
+    },
+    "shop_the_look": {
+      "type": "shop-the-look",
+      "settings": {}
+    },
+    "find_your_ravetto": {
+      "type": "find-your-ravetto",
+      "settings": {}
+    },
+    "inside_ravetto": {
+      "type": "inside-ravetto",
+      "settings": {}
+    },
+    "packaging_story": {
+      "type": "packaging-story",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "fabric_explorer",
+    "ravetto_thread",
+    "craft_details",
+    "shop_the_look",
+    "find_your_ravetto",
+    "inside_ravetto",
+    "packaging_story"
+  ]
+}

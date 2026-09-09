@@ -1,0 +1,61 @@
+<div id="SizeGuideDrawer" class="atelier-drawer">
+  <div class="drawer-backdrop" onclick="document.getElementById('SizeGuideDrawer').classList.remove('is-open')"></div>
+  <div class="drawer-panel" style="max-width: 520px;">
+    <div style="padding: 24px; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <span class="micro-caps text-teal" style="display: block;">Fit Architecture</span>
+        <h3 class="font-editorial" style="font-size: 22px;">FIND YOUR SIZE</h3>
+      </div>
+      <button type="button" onclick="document.getElementById('SizeGuideDrawer').classList.remove('is-open')" style="font-size: 18px; color: var(--color-muted);">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div style="padding: 24px; flex: 1; overflow-y: auto;">
+      <!-- Model Dimension Reference -->
+      <div style="padding: 12px 16px; background: var(--color-offwhite-paper); border: 1px solid var(--color-border); margin-bottom: 24px; font-size: 12px;">
+        <span style="font-weight: 600; color: var(--color-teal);">Model Reference:</span>
+        <span style="color: var(--color-muted);"> 6'1" / 185 cm &bull; 40" Chest &bull; Wearing Size Medium</span>
+      </div>
+
+      <!-- Measurement Table -->
+      <h4 class="micro-caps" style="margin-bottom: 12px;">Garment Measurements (Inches)</h4>
+      <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 32px; border: 1px solid var(--color-border);">
+        <thead>
+          <tr style="background: var(--color-paper); border-bottom: 1px solid var(--color-border); text-align: left;">
+            <th style="padding: 10px 12px;">SIZE</th>
+            <th style="padding: 10px 12px;">CHEST</th>
+            <th style="padding: 10px 12px;">LENGTH</th>
+            <th style="padding: 10px 12px;">SHOULDER</th>
+            <th style="padding: 10px 12px;">SLEEVE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--color-border);"><td style="padding: 10px 12px; font-weight: 600;">XS</td><td>38"</td><td>27.5"</td><td>17.5"</td><td>8.0"</td></tr>
+          <tr style="border-bottom: 1px solid var(--color-border);"><td style="padding: 10px 12px; font-weight: 600;">S</td><td>40"</td><td>28.5"</td><td>18.5"</td><td>8.5"</td></tr>
+          <tr style="border-bottom: 1px solid var(--color-border);"><td style="padding: 10px 12px; font-weight: 600; color: var(--color-teal);">M</td><td>42"</td><td>29.5"</td><td>19.5"</td><td>9.0"</td></tr>
+          <tr style="border-bottom: 1px solid var(--color-border);"><td style="padding: 10px 12px; font-weight: 600;">L</td><td>44"</td><td>30.5"</td><td>20.5"</td><td>9.5"</td></tr>
+          <tr style="border-bottom: 1px solid var(--color-border);"><td style="padding: 10px 12px; font-weight: 600;">XL</td><td>46"</td><td>31.5"</td><td>21.5"</td><td>10.0"</td></tr>
+          <tr><td style="padding: 10px 12px; font-weight: 600;">XXL</td><td>48"</td><td>32.5"</td><td>22.5"</td><td>10.5"</td></tr>
+        </tbody>
+      </table>
+
+      <!-- HOW TO MEASURE WITH SVG TEE -->
+      <h4 class="micro-caps" style="margin-bottom: 12px;">HOW TO MEASURE</h4>
+      <div style="display: flex; gap: 20px; align-items: center; background: var(--color-offwhite-paper); padding: 20px; border: 1px solid var(--color-border);">
+        <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <path d="M30 10 C38 20 62 20 70 10 L88 28 L78 40 L70 34 L70 95 L30 95 L30 34 L22 40 L12 28 Z" stroke="#0D4F4A" stroke-width="2" fill="#fff"/>
+          <!-- Chest Line -->
+          <line x1="30" y1="50" x2="70" y2="50" stroke="#B8E0D2" stroke-width="2" stroke-dasharray="3 3"/>
+          <!-- Length Line -->
+          <line x1="50" y1="18" x2="50" y2="95" stroke="#0D4F4A" stroke-width="1.5" stroke-dasharray="2 2"/>
+        </svg>
+        <div style="font-size: 11px; color: var(--color-muted); line-height: 1.6;">
+          <p><strong style="color: var(--color-text);">Chest:</strong> Measure across the fullest part, 1" below armhole.</p>
+          <p><strong style="color: var(--color-text);">Length:</strong> From highest point of shoulder to bottom hem.</p>
+          <p><strong style="color: var(--color-text);">Shoulder:</strong> From shoulder seam to shoulder seam across back.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

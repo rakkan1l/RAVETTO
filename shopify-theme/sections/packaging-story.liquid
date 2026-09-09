@@ -1,0 +1,50 @@
+<section class="packaging-story-section" style="padding: 96px 0; background-color: var(--color-offwhite); border-bottom: 1px solid var(--color-border);">
+  <div class="container-atelier">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: center;">
+      <!-- Packaging Photography -->
+      <div style="position: relative; aspect-ratio: 4 / 3; background: var(--color-paper); border: 1px solid var(--color-border); overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85" alt="Ravetto Packaging" style="width: 100%; height: 100%; object-fit: cover;">
+        <span class="micro-caps text-teal" style="position: absolute; bottom: 16px; left: 16px; background: rgba(255,255,255,0.9); padding: 4px 10px;">
+          Recycled Board &bull; FSC Certified
+        </span>
+      </div>
+
+      <!-- Copy & 5 Elements -->
+      <div>
+        <span class="micro-caps text-teal" style="display: block; margin-bottom: 8px;">Packaging Architecture</span>
+        <h2 class="font-editorial" style="font-size: clamp(28px, 4vw, 44px); font-weight: 500; margin-bottom: 16px;">
+          ARRIVES AS INTENDED.
+        </h2>
+        <p style="font-size: 13px; color: var(--color-muted); line-height: 1.6; margin-bottom: 24px;">
+          The tactile experience of luxury begins the moment your parcel is delivered. Every order is prepared with deliberate restraint using recyclable materials.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--color-border); padding-top: 16px;">
+          {% assign items = 'Ravetto Box:Custom rigid kraft box engineered against crush deformation.,Garment:Steam-pressed and precision-folded at the atelier.,Tissue:Acid-free unbleached tissue wrap with subtle embossing.,Hang Tag:Heavyweight FSC paper tag with natural cotton cord.,Thank-You Card:Hand-numbered inspector card with garment lot details.' | split: ',' %}
+          {% for it in items %}
+            {% assign p = it | split: ':' %}
+            <div style="display: flex; align-items: baseline; gap: 12px; font-size: 12px; border-bottom: 1px solid rgba(226, 223, 214, 0.4); padding-bottom: 8px;">
+              <span style="font-family: monospace; font-weight: bold; color: var(--color-teal); min-width: 24px;">0{{ forloop.index }}</span>
+              <div>
+                <span class="micro-caps" style="color: var(--color-text); display: block;">{{ p[0] }}</span>
+                <span style="color: var(--color-muted);">{{ p[1] }}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Packaging Story",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Packaging Story"
+    }
+  ]
+}
+{% endschema %}

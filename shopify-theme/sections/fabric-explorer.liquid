@@ -1,0 +1,74 @@
+<section class="fabric-explorer-section">
+  <div class="container-atelier">
+    <!-- Header -->
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 48px auto;">
+      <span class="micro-caps text-teal" style="display: block; margin-bottom: 8px;">Material Architecture</span>
+      <h2 class="font-editorial" style="font-size: clamp(28px, 4vw, 44px); font-weight: 500; margin-bottom: 8px;">
+        Fabric Explorer
+      </h2>
+      <p class="micro-caps text-muted">240 GSM &bull; 100% Premium Cotton</p>
+    </div>
+
+    <!-- Feature Pills -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 48px;">
+      {% assign specs = '240 GSM,100% Premium Cotton,Dense Knit,Soft Hand Feel,Breathable Construction,Pre-Shrunk Finish' | split: ',' %}
+      {% for spec in specs %}
+        <span style="background: var(--color-offwhite); border: 1px solid var(--color-border); padding: 6px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 500;">
+          {{ spec }}
+        </span>
+      {% endfor %}
+    </div>
+
+    <!-- Canvas Grid with Cursor Magnifier Loupe -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: center;">
+      <div class="fabric-canvas-container">
+        <img src="{{ section.settings.macro_image | default: 'https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=1600&q=95' }}" alt="240 GSM Macro Cotton" class="fabric-macro-img">
+        <div class="fabric-magnifier"></div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="border-left: 2px solid var(--color-teal); padding-left: 20px;">
+          <span class="micro-caps text-teal" style="display: block; margin-bottom: 4px;">01 &bull; DENSE KNIT</span>
+          <h3 class="font-editorial" style="font-size: 20px; margin-bottom: 6px;">24 Loops Per Inch</h3>
+          <p style="font-size: 13px; color: var(--color-muted); line-height: 1.6;">
+            High-tension 24-gauge knitting creates an opaque, substantial weave that eliminates sheer transparency and resists warping.
+          </p>
+        </div>
+
+        <div style="border-left: 2px solid var(--color-border); padding-left: 20px;">
+          <span class="micro-caps text-muted" style="display: block; margin-bottom: 4px;">02 &bull; SOFT HAND FEEL</span>
+          <h3 class="font-editorial" style="font-size: 20px; margin-bottom: 6px;">Long-Staple Supima</h3>
+          <p style="font-size: 13px; color: var(--color-muted); line-height: 1.6;">
+            Combed long-staple cotton yarns produce a buttery tactile finish that softens further with every wear and wash cycle.
+          </p>
+        </div>
+
+        <div style="border-left: 2px solid var(--color-border); padding-left: 20px;">
+          <span class="micro-caps text-muted" style="display: block; margin-bottom: 4px;">03 &bull; PRE-SHRUNK FINISH</span>
+          <h3 class="font-editorial" style="font-size: 20px; margin-bottom: 6px;">Mechanical Bio-Polish</h3>
+          <p style="font-size: 13px; color: var(--color-muted); line-height: 1.6;">
+            Stabilized with mechanical steam calendars and natural plant enzymes for permanent dimensional stability wash after wash.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fabric Explorer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "macro_image",
+      "label": "Macro Fabric Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fabric Explorer"
+    }
+  ]
+}
+{% endschema %}

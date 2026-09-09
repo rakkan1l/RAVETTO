@@ -1,0 +1,91 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "RAVETTO Atelier",
+    "theme_version": "1.0.0",
+    "theme_author": "RAVETTO",
+    "theme_documentation_url": "https://ravetto.com",
+    "theme_support_url": "https://ravetto.com"
+  },
+  {
+    "name": "Colors & Tokens",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background (Off White)",
+        "default": "#F5F4EF"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Paper Accent",
+        "default": "#EFECE4"
+      },
+      {
+        "type": "color",
+        "id": "color_teal",
+        "label": "Brand Teal",
+        "default": "#0D4F4A"
+      },
+      {
+        "type": "color",
+        "id": "color_mint",
+        "label": "Mint Accent",
+        "default": "#B8E0D2"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#172B2A"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted Text",
+        "default": "#617371"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Hairline Border",
+        "default": "#E2DFD6"
+      }
+    ]
+  },
+  {
+    "name": "Complimentary Shipping",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Complimentary Shipping Threshold (in store currency)",
+        "default": 2500
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "default": "https://instagram.com/ravetto"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "X / Twitter URL",
+        "default": "https://twitter.com/ravetto"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL",
+        "default": "https://pinterest.com/ravetto"
+      }
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+{% comment %}
+  RAVETTO Product Card Snippet
+  Accepts: 'product'
+{% endcomment %}
+
+<div class="product-card">
+  <div class="card-media" onclick="window.location.href='{{ product.url }}'">
+    <!-- Primary Clean Image -->
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" class="card-img-primary" loading="lazy">
+    {% endif %}
+
+    <!-- Secondary Hover Image -->
+    {% if product.images[1] %}
+      <img src="{{ product.images[1] | image_url: width: 600 }}" alt="{{ product.title }}" class="card-img-secondary" loading="lazy">
+    {% else %}
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" class="card-img-secondary" loading="lazy">
+    {% endif %}
+
+    <!-- GSM Badge -->
+    <div style="position: absolute; top: 12px; left: 12px; z-index: 10;">
+      <span class="micro-caps" style="background: rgba(23, 43, 42, 0.85); color: #fff; padding: 2px 8px; font-size: 9px; backdrop-filter: blur(4px);">
+        240 GSM
+      </span>
+    </div>
+
+    <!-- Quick Shop Trigger Button -->
+    <button type="button" class="card-quick-shop-btn" data-quick-shop-btn data-product-handle="{{ product.handle }}">
+      QUICK SHOP
+    </button>
+  </div>
+
+  <div style="padding-top: 14px;">
+    <h3 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 4px;">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    <span style="font-family: monospace; font-size: 12px; font-weight: 600; color: var(--color-teal);">
+      {{ product.price | money }}
+    </span>
+  </div>
+</div>

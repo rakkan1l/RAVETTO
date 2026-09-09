@@ -1,0 +1,60 @@
+<section class="ravetto-thread-section">
+  <div class="container-atelier" style="position: relative; z-index: 10;">
+    <!-- Intro -->
+    <div style="text-align: center; max-width: 580px; margin: 0 auto 70px auto;">
+      <span class="micro-caps text-mint" style="display: block; margin-bottom: 8px;">Signature Lineage</span>
+      <h2 class="font-editorial" style="font-size: clamp(30px, 4.5vw, 48px); font-weight: 500; margin-bottom: 8px; color: #fff;">
+        The Ravetto Thread
+      </h2>
+      <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.7); font-family: monospace;">
+        Scroll to follow the line of craft
+      </p>
+    </div>
+
+    <!-- The Scroll Thread Canvas -->
+    <div style="position: relative; max-width: 640px; margin: 0 auto;">
+      <div class="thread-guide-line"></div>
+      <div class="thread-active-line"></div>
+
+      {% assign stages = 'MATERIAL,WEIGHT,FIT,CUT,STITCH,FINISH,RAVETTO' | split: ',' %}
+      {% assign specs = '100% Combed Supima Cotton,240–280 GSM Architecture,Balanced Posture Geometry,Laser Grain Geometry,Twin-Needle Tension,Enzymatic Bio-Polish,Permanent Foundational Uniform' | split: ',' %}
+      
+      <div style="display: flex; flex-direction: column; gap: 50px; position: relative; z-index: 10;">
+        {% for stage in stages %}
+          {% assign idx = forloop.index0 %}
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+            <div style="flex: 1; text-align: {% cycle 'right', 'left' %}; {% if forloop.index == 2 or forloop.index == 4 or forloop.index == 6 %}order: 3;{% endif %}">
+              <span class="micro-caps" style="color: var(--color-mint); display: block;">{{ stage }}</span>
+              <span style="font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500;">{{ specs[idx] }}</span>
+            </div>
+
+            <div class="thread-stage-node" style="order: 2;">
+              {{ forloop.index }}
+            </div>
+
+            <div style="flex: 1; {% if forloop.index == 2 or forloop.index == 4 or forloop.index == 6 %}order: 1;{% else %}order: 3;{% endif %}"></div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Concluding Creed -->
+      <div style="text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15);">
+        <p class="micro-caps" style="color: var(--color-mint); letter-spacing: 0.25em; font-size: 12px;">
+          EVERY DETAIL HAS A PURPOSE.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ravetto Thread",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Ravetto Thread"
+    }
+  ]
+}
+{% endschema %}

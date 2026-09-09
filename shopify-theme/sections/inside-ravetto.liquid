@@ -1,0 +1,44 @@
+<section class="inside-ravetto-section" style="padding: 96px 0; background-color: var(--color-offwhite-paper); border-bottom: 1px solid var(--color-border);">
+  <div class="container-atelier">
+    <!-- Intro -->
+    <div style="text-align: center; max-width: 600px; margin: 0 auto 50px auto;">
+      <span class="micro-caps text-teal" style="display: block; margin-bottom: 8px;">The Atelier Manifesto</span>
+      <h2 class="font-editorial" style="font-size: clamp(28px, 4vw, 44px); font-weight: 500; margin-bottom: 8px;">
+        NOT JUST ANOTHER T-SHIRT.
+      </h2>
+      <p class="micro-caps text-muted">
+        The five foundational disciplines of the Ravetto garment
+      </p>
+    </div>
+
+    <!-- 5 Pillars -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: center;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        {% assign disciplines = '01 THE MATERIAL:Extra-long staple Supima cotton yielding twice the tensile strength of conventional fibers.,02 THE WEIGHT:240–280 GSM substantial knit density that completely eliminates sheer transparency.,03 THE CUT:Laser patterned along true warp grain lines to completely neutralize side-seam twisting.,04 THE STITCH:Double-ribbed high-recovery collar ribbing with internal herringbone shoulder taping.,05 THE FINISH:Enzymatic bio-polish washes for a velvety hand feel that softens further with every wash.' | split: ',' %}
+        {% for disc in disciplines %}
+          {% assign parts = disc | split: ':' %}
+          <div style="padding: 16px 20px; background: var(--color-offwhite); border: 1px solid var(--color-border);">
+            <span class="micro-caps text-teal" style="display: block; margin-bottom: 4px;">{{ parts[0] }}</span>
+            <p style="font-size: 12px; color: var(--color-muted); line-height: 1.5;">{{ parts[1] }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div style="position: relative; aspect-ratio: 16 / 10; background: var(--color-offwhite); border: 1px solid var(--color-border); overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=1200&q=85" alt="Inside Ravetto" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Inside Ravetto",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Inside Ravetto"
+    }
+  ]
+}
+{% endschema %}

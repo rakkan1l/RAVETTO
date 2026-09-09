@@ -1,0 +1,25 @@
+{
+  "current": {
+    "color_bg": "#F5F4EF",
+    "color_paper": "#EFECE4",
+    "color_teal": "#0D4F4A",
+    "color_mint": "#B8E0D2",
+    "color_text": "#172B2A",
+    "color_muted": "#617371",
+    "color_border": "#E2DFD6",
+    "free_shipping_threshold": 2500,
+    "social_instagram": "https://instagram.com/ravetto",
+    "social_twitter": "https://twitter.com/ravetto",
+    "social_pinterest": "https://pinterest.com/ravetto",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    }
+  }
+}

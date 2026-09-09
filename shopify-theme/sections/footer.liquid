@@ -1,0 +1,79 @@
+<footer class="atelier-footer" style="background-color: var(--color-offwhite-paper); border-top: 1px solid var(--color-border); padding: 70px 0 40px 0;">
+  <div class="container-atelier">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 60px; border-bottom: 1px solid var(--color-border);">
+      <!-- Brand Manifesto -->
+      <div style="grid-column: span 2;">
+        <span style="font-family: var(--font-editorial); font-size: 24px; letter-spacing: 0.24em; color: var(--color-teal); display: block; margin-bottom: 12px;">
+          RAVETTO
+        </span>
+        <p class="micro-caps" style="color: var(--color-text); margin-bottom: 8px;">
+          Made with intention. Worn without effort.
+        </p>
+        <p style="font-size: 12px; color: var(--color-muted); max-width: 360px; line-height: 1.6;">
+          Heavyweight architectural T-shirts crafted from combed Supima cotton in Tiruppur, India. Designed around tactile restraint and lifelong structural retention.
+        </p>
+      </div>
+
+      <!-- Shop -->
+      <div>
+        <h4 class="micro-caps" style="color: var(--color-text); margin-bottom: 16px;">Shop</h4>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--color-muted);">
+          <a href="/collections/all" style="transition: color 0.2s;">All Garments</a>
+          <a href="/collections/the-foundations" style="transition: color 0.2s;">The Foundations</a>
+          <a href="/collections/heavyweight-atelier" style="transition: color 0.2s;">Heavyweight Atelier</a>
+        </div>
+      </div>
+
+      <!-- Atelier -->
+      <div>
+        <h4 class="micro-caps" style="color: var(--color-text); margin-bottom: 16px;">Atelier</h4>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--color-muted);">
+          <a href="/pages/about" style="transition: color 0.2s;">Brand Story</a>
+          <a href="/pages/materials" style="transition: color 0.2s;">Materials & GSM</a>
+          <a href="/pages/craft" style="transition: color 0.2s;">Craftsmanship</a>
+          <a href="/blogs/journal" style="transition: color 0.2s;">Journal</a>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div>
+        <h4 class="micro-caps" style="color: var(--color-text); margin-bottom: 16px;">Inscribe</h4>
+        <p style="font-size: 12px; color: var(--color-muted); margin-bottom: 12px;">
+          Quiet releases, fabric archives, and private restock notes.
+        </p>
+        {% form 'customer', class: 'newsletter-form' %}
+          <div style="display: flex; border: 1px solid var(--color-border); background: var(--color-offwhite);">
+            <input type="email" name="contact[email]" placeholder="atelier@domain.com" style="width: 100%; border: none; background: transparent; padding: 10px 12px; font-size: 12px; outline: none;" required>
+            <button type="submit" style="padding: 0 14px; color: var(--color-teal);" aria-label="Subscribe">
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+
+    <!-- Bottom Bar with Font Awesome Social Icons -->
+    <div style="padding-top: 30px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-muted); gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span>&copy; {{ 'now' | date: '%Y' }} RAVETTO ATELIER. All rights reserved.</span>
+        <div style="display: flex; gap: 14px; font-size: 13px;">
+          <a href="{{ settings.social_instagram | default: '#' }}" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="{{ settings.social_twitter | default: '#' }}" target="_blank" rel="noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="{{ settings.social_pinterest | default: '#' }}" target="_blank" rel="noreferrer" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+        </div>
+      </div>
+      <div style="display: flex; gap: 20px;">
+        <a href="/pages/shipping">Shipping & Returns</a>
+        <a href="/pages/size-guide">Size Guide</a>
+        <a href="/pages/faq">FAQ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

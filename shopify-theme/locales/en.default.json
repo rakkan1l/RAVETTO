@@ -1,0 +1,73 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Enter Atelier using password",
+      "login_password_button": "Enter with password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_error": "Incorrect password",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"text-link\">Log in here</a>"
+    },
+    "search": {
+      "search": "Search garments...",
+      "heading": "Search Ravetto",
+      "submit": "Search",
+      "empty_search_message": "NOTHING FOUND. Try another phrase or explore the collection."
+    },
+    "accessibility": {
+      "close": "Close",
+      "skip_to_content": "Skip to content",
+      "loading": "Loading..."
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "YOUR BAG",
+      "empty": "YOUR BAG IS QUIET.",
+      "empty_subtext": "Discover the collection.",
+      "continue_shopping": "Discover The Collection",
+      "checkout": "CHECKOUT",
+      "subtotal": "Subtotal",
+      "free_shipping_unlocked": "COMPLIMENTARY SHIPPING UNLOCKED",
+      "free_shipping_away": "AWAY FROM COMPLIMENTARY SHIPPING"
+    },
+    "header": {
+      "menu": "Menu",
+      "cart_count": {
+        "one": "1 Piece",
+        "other": "{{ count }} Pieces"
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "ADD TO BAG",
+      "sold_out": "SOLD OUT",
+      "unavailable": "UNAVAILABLE",
+      "quantity": "Quantity",
+      "size": "Size",
+      "color": "Color",
+      "view_full_details": "VIEW FULL DETAILS",
+      "size_guide": "FIND YOUR SIZE",
+      "how_to_measure": "HOW TO MEASURE"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "details": "Account Details",
+      "view_addresses": "View Addresses",
+      "orders": "Orders",
+      "no_orders": "NO ORDERS YET.",
+      "no_orders_subtext": "Your Ravetto pieces will appear here after purchase."
+    },
+    "orders": {
+      "order_number": "Order #",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "tracking": "Tracking"
+    }
+  }
+}

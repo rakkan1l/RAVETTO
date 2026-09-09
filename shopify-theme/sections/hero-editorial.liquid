@@ -1,0 +1,71 @@
+<section class="hero-editorial-section" style="position: relative; min-height: 85vh; display: flex; align-items: center; justify-content: center; background-color: var(--color-offwhite-paper); overflow: hidden; border-bottom: 1px solid var(--color-border);">
+  <div style="position: absolute; inset: 0; z-index: 0;">
+    <img src="{{ section.settings.image | default: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=2200&q=90' }}" alt="{{ section.settings.heading }}" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.92);">
+    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(23, 43, 42, 0.75) 0%, rgba(23, 43, 42, 0.2) 60%, transparent 100%);"></div>
+  </div>
+
+  <div class="container-atelier" style="position: relative; z-index: 10; text-align: center; color: #ffffff; padding: 60px 20px;">
+    <span class="micro-caps" style="color: var(--color-mint); display: inline-block; margin-bottom: 16px; background: rgba(13, 79, 74, 0.6); backdrop-filter: blur(4px); padding: 4px 14px; border: 1px solid rgba(184, 224, 210, 0.4);">
+      {{ section.settings.badge | default: 'SS26 Foundational Uniform' }}
+    </span>
+    <h1 class="font-editorial" style="font-size: clamp(36px, 6vw, 72px); font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase;">
+      {{ section.settings.heading | default: 'DESIGNED FOR EVERY DAY.<br>MADE BEYOND ORDINARY.' }}
+    </h1>
+    <p style="font-size: clamp(12px, 1.5vw, 15px); max-width: 540px; margin: 0 auto 32px auto; color: rgba(255, 255, 255, 0.85); font-weight: 400; line-height: 1.6;">
+      {{ section.settings.subheading | default: 'Engineered from 240–280 GSM long-staple combed cotton in Tiruppur. An intentional uniform of quiet luxury.' }}
+    </p>
+    <div style="display: flex; justify-content: center; gap: 16px;">
+      <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn-primary" style="background-color: #ffffff; color: var(--color-teal);">
+        {{ section.settings.button_text | default: 'EXPLORE THE COLLECTION' }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "default": "SS26 Foundational Uniform"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "DESIGNED FOR EVERY DAY.<br>MADE BEYOND ORDINARY."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Engineered from 240–280 GSM long-staple combed cotton in Tiruppur. An intentional uniform of quiet luxury."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "EXPLORE THE COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Hero"
+    }
+  ]
+}
+{% endschema %}
