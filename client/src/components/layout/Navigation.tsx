@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, User, Bookmark, ShoppingBag, Menu, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, User, Heart, ShoppingBag, Menu, Shield } from 'lucide-react';
 import { useCartStore } from '../../stores/cartStore';
 import { useSavedStore } from '../../stores/savedStore';
 import { useAuthStore } from '../../stores/authStore';
@@ -13,7 +13,8 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isShopMegaOpen, setIsShopMegaOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const { cart, toggleCart } = useCartStore();
   const { savedItems } = useSavedStore();
   const { user, openAuthModal } = useAuthStore();
@@ -22,161 +23,112 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate 
   const bagCount = cart?.itemCount || 0;
   const savedCount = savedItems.length;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    { label: 'Shop', path: '/shop' },
+    { label: 'New Arrivals', path: '/shop?filter=new' },
+    { label: 'Collections', path: '/collections' },
+    { label: 'About', path: '/about' },
+  ];
+
   return (
     <>
-      <header className="sticky top-0 z-40 bg-ravetto-offwhite/95 backdrop-blur-md border-b border-ravetto-border transition-all duration-300">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 h-18 sm:h-20 flex items-center justify-between">
-          {/* Left: Mobile hamburger & Desktop primary links */}
-          <div className="flex items-center space-x-8">
+      {/* Floating Capsule Header Container */}
+      <header className="fixed top-3 sm:top-5 inset-x-0 z-40 px-3 sm:px-6 lg:px-8 pointer-events-none transition-all duration-300">
+        <div
+          className={`pointer-events-auto max-w-[1360px] mx-auto w-full rounded-full transition-all duration-300 ease-out flex items-center justify-between px-4 sm:px-8 ${
+            isScrolled
+              ? 'h-[62px] sm:h-[66px] bg-[#FFFFFF]/95 shadow-[0_8px_30px_rgba(92,64,51,0.10)] border border-[#5C4033]/10 backdrop-blur-md'
+              : 'h-[72px] sm:h-[76px] bg-[#FFFFFF]/90 shadow-[0_4px_20px_rgba(92,64,51,0.06)] border border-[#5C4033]/08 backdrop-blur-sm'
+          }`}
+        >
+          {/* Left: Mobile hamburger & Brand Mark */}
+          <div className="flex items-center space-x-3 sm:space-x-4">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-2 -ml-2 text-ravetto-text hover:text-ravetto-teal transition-colors"
+              className="lg:hidden p-2 text-[#5C4033] hover:text-[#879E57] transition-colors rounded-full focus-visible:outline-none"
               aria-label="Open mobile menu"
             >
               <Menu className="w-5 h-5" />
             </button>
 
-            <nav className="hidden lg:flex items-center space-x-7 text-xs uppercase tracking-[0.18em] font-medium">
-              {/* Shop with Editorial Mega Menu */}
-              <div
-                className="relative group"
-                onMouseEnter={() => setIsShopMegaOpen(true)}
-                onMouseLeave={() => setIsShopMegaOpen(false)}
-              >
+            <button
+              onClick={() => onNavigate('/')}
+              className="text-left select-none group flex items-center space-x-2 focus-visible:outline-none"
+            >
+              <span className="font-outfit text-xl sm:text-2xl font-bold tracking-[0.18em] text-[#5C4033] group-hover:text-[#879E57] transition-colors">
+                RAVETTO
+              </span>
+            </button>
+          </div>
+
+          {/* Center: Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-8 text-[14px] font-medium font-outfit">
+            {navItems.map((item) => {
+              const isActive =
+                item.path === '/shop?filter=new'
+                  ? currentPath.includes('filter=new')
+                  : currentPath === item.path;
+
+              return (
                 <button
-                  onClick={() => onNavigate('/shop')}
-                  className={`transition-colors py-1 flex items-center space-x-1 ${
-                    currentPath === '/shop' ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
+                  key={item.label}
+                  onClick={() => onNavigate(item.path)}
+                  className={`relative py-2 px-1 transition-colors group flex flex-col items-center select-none ${
+                    isActive ? 'text-[#879E57] font-semibold' : 'text-[#5C4033] hover:text-[#879E57]'
                   }`}
                 >
-                  <span>Shop</span>
+                  <span>{item.label}</span>
+                  {/* Subtle animated underline / dot indicator */}
+                  <span
+                    className={`absolute bottom-0.5 h-[2.5px] rounded-full bg-[#879E57] transition-all duration-200 ${
+                      isActive ? 'w-4' : 'w-0 group-hover:w-3 opacity-0 group-hover:opacity-100'
+                    }`}
+                  />
                 </button>
+              );
+            })}
+          </nav>
 
-                {/* Editorial Mega Menu Dropdown */}
-                {isShopMegaOpen && (
-                  <div className="absolute top-full left-0 w-[580px] bg-ravetto-offwhite border border-ravetto-border shadow-2xl p-8 z-50 animate-fadeIn">
-                    <div className="grid grid-cols-12 gap-8 items-center">
-                      {/* Left: Collections Links */}
-                      <div className="col-span-6 space-y-4 text-left">
-                        <span className="text-[10px] uppercase font-mono tracking-[0.22em] text-ravetto-teal font-bold block">
-                          Collections
-                        </span>
-                        <div className="space-y-3">
-                          {[
-                            { name: 'NEW ARRIVALS', path: '/shop?filter=new' },
-                            { name: 'ESSENTIAL TEES', path: '/collections/essentials' },
-                            { name: 'HEAVYWEIGHT', path: '/shop?filter=heavyweight' },
-                            { name: 'RELAXED FIT', path: '/shop?filter=relaxed' },
-                            { name: 'SHOP ALL', path: '/shop' },
-                          ].map((item) => (
-                            <button
-                              key={item.name}
-                              onClick={() => {
-                                setIsShopMegaOpen(false);
-                                onNavigate(item.path);
-                              }}
-                              className="block text-xs uppercase tracking-[0.16em] font-medium text-ravetto-text hover:text-ravetto-teal hover:translate-x-1 transition-all"
-                            >
-                              {item.name}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Right: Large Editorial Campaign Imagery */}
-                      <div
-                        onClick={() => {
-                          setIsShopMegaOpen(false);
-                          onNavigate('/shop');
-                        }}
-                        className="col-span-6 cursor-pointer group/card overflow-hidden"
-                      >
-                        <div className="relative aspect-[4/5] bg-ravetto-offwhite-paper overflow-hidden">
-                          <img
-                            src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=85"
-                            alt="Ravetto Editorial Campaign"
-                            className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-700 ease-out"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-ravetto-text/70 via-transparent to-transparent opacity-80" />
-                          <div className="absolute bottom-3 left-3 right-3 text-left">
-                            <span className="text-[9px] uppercase font-mono tracking-widest text-white/80 block">
-                              SS26 Campaign
-                            </span>
-                            <span className="font-editorial text-xs font-medium text-white block">
-                              Timeless Proportions
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <button
-                onClick={() => onNavigate('/collections')}
-                className={`transition-colors py-1 ${
-                  currentPath.startsWith('/collections') ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
-                }`}
-              >
-                Collections
-              </button>
-              <button
-                onClick={() => onNavigate('/materials')}
-                className={`transition-colors py-1 ${
-                  currentPath === '/materials' ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
-                }`}
-              >
-                Materials
-              </button>
-              <button
-                onClick={() => onNavigate('/craft')}
-                className={`transition-colors py-1 ${
-                  currentPath === '/craft' ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
-                }`}
-              >
-                Craft
-              </button>
-              <button
-                onClick={() => onNavigate('/journal')}
-                className={`transition-colors py-1 ${
-                  currentPath.startsWith('/journal') ? 'text-ravetto-teal font-semibold' : 'text-ravetto-text hover:text-ravetto-teal'
-                }`}
-              >
-                Journal
-              </button>
-            </nav>
-          </div>
-
-          {/* Center: Brand Mark */}
-          <div className="text-center select-none cursor-pointer" onClick={() => onNavigate('/')}>
-            <span className="font-editorial text-2xl sm:text-3xl tracking-[0.24em] font-medium text-ravetto-text hover:text-ravetto-teal transition-colors">
-              RAVETTO
-            </span>
-          </div>
-
-          {/* Right: Actions */}
-          <div className="flex items-center space-x-1 sm:space-x-3">
+          {/* Right: Actions (Search, Wishlist, Account, Shopping Bag) */}
+          <div className="flex items-center space-x-1 sm:space-x-2 text-[#5C4033]">
             {/* Search Trigger */}
             <button
               onClick={openSearch}
-              className="p-2 sm:px-3 text-ravetto-text hover:text-ravetto-teal transition-colors flex items-center space-x-1.5"
+              className="p-2 sm:px-3 hover:text-[#879E57] transition-colors flex items-center space-x-1.5 rounded-full focus-visible:outline-none"
               aria-label="Search garments"
             >
               <Search className="w-4 h-4" />
-              <span className="hidden xl:inline text-[10px] tracking-widest uppercase text-ravetto-muted font-mono">
-                ⌘K
+              <span className="hidden xl:inline text-[11px] font-outfit text-[#8C7E7E]">
+                Search
               </span>
             </button>
 
-            {/* Saved Pieces Wishlist */}
+            {/* Wishlist Heart */}
             <button
               onClick={() => onNavigate('/saved')}
-              className="p-2 text-ravetto-text hover:text-ravetto-teal transition-colors relative"
-              aria-label="Saved pieces"
+              className="p-2 hover:text-[#C93A5C] transition-all duration-200 relative group rounded-full focus-visible:outline-none"
+              aria-label="Wishlist pieces"
             >
-              <Bookmark className="w-4 h-4" />
+              <Heart
+                className={`w-4 h-4 transition-transform duration-200 group-hover:scale-110 ${
+                  savedCount > 0 ? 'fill-[#C93A5C] text-[#C93A5C]' : 'text-[#5C4033] group-hover:text-[#C93A5C]'
+                }`}
+              />
               {savedCount > 0 && (
-                <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-ravetto-mint text-ravetto-text font-mono text-[9px] font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 bg-[#C93A5C] text-white font-sans text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm animate-fadeIn">
                   {savedCount}
                 </span>
               )}
@@ -188,7 +140,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate 
                 {user.role === 'ADMIN' && (
                   <button
                     onClick={() => onNavigate('/admin')}
-                    className="p-2 text-amber-700 hover:text-amber-900 transition-colors"
+                    className="p-2 text-amber-700 hover:text-amber-900 transition-colors rounded-full"
                     title="Atelier Admin Console"
                     aria-label="Admin panel"
                   >
@@ -197,7 +149,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate 
                 )}
                 <button
                   onClick={() => onNavigate('/account')}
-                  className="p-2 text-ravetto-text hover:text-ravetto-teal transition-colors"
+                  className="p-2 hover:text-[#879E57] transition-colors rounded-full"
                   aria-label="My account"
                 >
                   <User className="w-4 h-4" />
@@ -206,27 +158,30 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPath, onNavigate 
             ) : (
               <button
                 onClick={() => openAuthModal('login')}
-                className="p-2 text-ravetto-text hover:text-ravetto-teal transition-colors"
+                className="p-2 hover:text-[#879E57] transition-colors rounded-full"
                 aria-label="Sign in"
               >
                 <User className="w-4 h-4" />
               </button>
             )}
 
-            {/* Bag Trigger */}
+            {/* Shopping Bag Pill Trigger */}
             <button
               onClick={toggleCart}
-              className="p-2 -mr-1.5 sm:mr-0 text-ravetto-text hover:text-ravetto-teal transition-colors relative flex items-center space-x-1.5"
+              className="ml-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#879E57]/10 hover:bg-[#879E57] text-[#5C4033] hover:text-white transition-all duration-200 flex items-center space-x-2 focus-visible:outline-none group active:scale-95"
               aria-label="Shopping bag"
             >
-              <ShoppingBag className="w-4 h-4 text-ravetto-teal" />
-              <span className="text-xs font-mono font-medium tracking-tight text-ravetto-teal">
-                [{bagCount}]
+              <ShoppingBag className="w-4 h-4 text-[#879E57] group-hover:text-white transition-colors" />
+              <span className="text-xs font-semibold font-outfit text-[#879E57] group-hover:text-white transition-colors">
+                {bagCount}
               </span>
             </button>
           </div>
         </div>
       </header>
+
+      {/* Spacer to prevent page content from being hidden behind fixed header */}
+      <div className="h-20 sm:h-24" />
 
       {/* Mobile Drawer */}
       <MobileNav

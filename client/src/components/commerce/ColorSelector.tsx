@@ -13,17 +13,17 @@ export const ColorSelector: React.FC<ColorSelectorProps> = ({
   onSelect,
 }) => {
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between text-xs">
-        <span className="uppercase tracking-[0.14em] text-ravetto-muted font-medium text-[11px]">
-          Color
+    <div className="space-y-2.5 text-left font-outfit">
+      <div className="flex items-center justify-between text-xs sm:text-sm">
+        <span className="uppercase tracking-[0.16em] text-[#8C7E7E] font-bold text-xs">
+          Colour
         </span>
-        <span className="font-medium text-ravetto-text tracking-wide text-xs">
-          {selectedColor?.name || 'Select'}
+        <span className="font-bold text-[#5C4033] tracking-wide">
+          {selectedColor?.name || 'Select colour'}
         </span>
       </div>
 
-      <div className="flex items-center space-x-2.5">
+      <div className="flex items-center space-x-3">
         {colors.map((color) => {
           const isSelected = selectedColor?.id === color.id;
           return (
@@ -32,15 +32,15 @@ export const ColorSelector: React.FC<ColorSelectorProps> = ({
               type="button"
               onClick={() => onSelect(color)}
               aria-label={`Select ${color.name}`}
-              className={`relative w-6 h-6 rounded-full transition-all focus:outline-none ${
+              className={`relative w-8 h-8 rounded-full transition-all duration-200 focus:outline-none shadow-sm ${
                 isSelected
-                  ? 'ring-2 ring-offset-2 ring-ravetto-teal scale-105'
-                  : 'hover:scale-105 opacity-85'
+                  ? 'ring-2 ring-offset-2 ring-[#879E57] scale-110'
+                  : 'hover:scale-105 opacity-80 hover:opacity-100'
               }`}
               style={{ backgroundColor: color.hexCode }}
             >
               {isSelected && (
-                <span className="absolute inset-0 rounded-full border border-white/40" />
+                <span className="absolute inset-0 rounded-full border-2 border-white/50" />
               )}
             </button>
           );

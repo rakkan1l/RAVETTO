@@ -14,6 +14,7 @@ import { HomePage } from './pages/HomePage';
 import { ShopPage } from './pages/ShopPage';
 import { CollectionDetailPage } from './pages/CollectionDetailPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
+import { CartPage } from './pages/CartPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { SavedPiecesPage } from './pages/SavedPiecesPage';
 import { AccountDashboardPage } from './pages/AccountDashboardPage';
@@ -84,6 +85,10 @@ export const App: React.FC = () => {
     if (currentPath.startsWith('/products/')) {
       const slug = currentPath.replace('/products/', '');
       return <ProductDetailPage slug={slug} onNavigate={navigate} />;
+    }
+
+    if (currentPath === '/cart') {
+      return <CartPage onNavigate={navigate} />;
     }
 
     if (currentPath === '/checkout') {

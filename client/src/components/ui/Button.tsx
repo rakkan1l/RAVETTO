@@ -16,20 +16,20 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium tracking-[0.14em] uppercase transition-all duration-300 focus-visible:outline-none disabled:opacity-40 disabled:cursor-not-allowed select-none';
+  const baseStyles = 'inline-flex items-center justify-center font-medium tracking-[0.14em] uppercase rounded-full transition-all duration-300 focus-visible:outline-none disabled:opacity-40 disabled:cursor-not-allowed select-none font-outfit active:scale-[0.98]';
 
   const sizeStyles = {
-    sm: 'text-[11px] px-4 py-2.5',
-    md: 'text-xs px-6 py-3.5',
+    sm: 'text-[11px] px-5 py-2.5',
+    md: 'text-xs px-7 py-3.5',
     lg: 'text-xs px-8 py-4',
   };
 
   const variantStyles = {
-    primary: 'bg-ravetto-teal text-white hover:bg-ravetto-teal-dark active:bg-black',
-    secondary: 'bg-ravetto-offwhite-paper text-ravetto-text hover:bg-ravetto-border border border-ravetto-border',
-    outline: 'border border-ravetto-text text-ravetto-text hover:bg-ravetto-text hover:text-white',
-    ghost: 'text-ravetto-text hover:text-ravetto-teal hover:bg-ravetto-offwhite-paper',
-    mint: 'bg-ravetto-mint text-ravetto-text hover:bg-ravetto-mint-dark font-semibold',
+    primary: 'bg-[#879E57] text-white hover:bg-[#728848] hover:-translate-y-0.5 shadow-sm hover:shadow-md active:bg-[#5C4033]',
+    secondary: 'bg-[#FFFFFF] text-[#5C4033] border border-[#5C4033]/25 hover:bg-[#5C4033] hover:text-[#FDFCF5] hover:-translate-y-0.5 shadow-sm active:bg-[#483126]',
+    outline: 'border border-[#5C4033] text-[#5C4033] hover:bg-[#5C4033] hover:text-[#FDFCF5] hover:-translate-y-0.5',
+    ghost: 'text-[#5C4033] hover:text-[#879E57] hover:bg-[#FDFCF5]',
+    mint: 'bg-[#879E57] text-white hover:bg-[#728848] font-semibold hover:-translate-y-0.5',
   };
 
   return (

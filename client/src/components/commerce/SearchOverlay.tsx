@@ -68,7 +68,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
     return () => clearTimeout(timer);
   }, [query]);
 
-  const popularTerms = ['240 GSM', 'Heavyweight', 'Deep Teal', 'Supima Cotton', 'Mock Neck'];
+  const popularTerms = ['Oversized', 'Black Tee', 'Essentials', 'New Arrivals'];
 
   return (
     <AnimatePresence>
@@ -80,7 +80,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeSearch}
-            className="fixed inset-0 bg-ravetto-text/50 backdrop-blur-md"
+            className="fixed inset-0 bg-[#5C4033]/50 backdrop-blur-md"
           />
 
           {/* Modal Container */}
@@ -89,63 +89,35 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative max-w-3xl mx-auto mt-16 sm:mt-24 px-4 sm:px-6 z-10"
+            className="relative max-w-3xl mx-auto mt-16 sm:mt-24 px-4 sm:px-6 z-10 font-outfit"
           >
-            <div className="bg-ravetto-offwhite border border-ravetto-border shadow-2xl overflow-hidden">
+            <div className="bg-[#FFFFFF] border border-[#5C4033]/10 rounded-[28px] shadow-2xl overflow-hidden">
               {/* Search Bar Input */}
-              <div className="flex items-center px-6 py-5 border-b border-ravetto-border">
-                <Search className="w-5 h-5 text-ravetto-teal mr-3.5 flex-shrink-0" />
+              <div className="flex items-center px-6 py-5 border-b border-[#5C4033]/10">
+                <Search className="w-5 h-5 text-[#879E57] mr-3.5 flex-shrink-0" />
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="SEARCH RAVETTO CATALOG (e.g. 240 GSM, Deep Teal, Supima...)"
-                  className="w-full bg-transparent text-sm sm:text-base text-ravetto-text placeholder-ravetto-muted/60 tracking-[0.06em] uppercase focus:outline-none"
+                  placeholder="Search products..."
+                  className="w-full bg-transparent text-sm sm:text-base text-[#5C4033] placeholder-[#8C7E7E]/70 font-medium focus:outline-none"
                 />
                 <button
                   onClick={closeSearch}
-                  className="p-1 text-ravetto-muted hover:text-ravetto-text transition-colors ml-2"
+                  className="p-1 text-[#8C7E7E] hover:text-[#5C4033] transition-colors ml-2 rounded-full"
                   aria-label="Close search"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Suggestions / Collections / Recent Searches */}
+              {/* Suggestions / Collections / Popular Searches */}
               {!query.trim() && (
                 <div className="p-6 sm:p-8 space-y-6 text-left">
-                  {/* Collections */}
-                  <div className="space-y-3">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ravetto-teal block">
-                      Collections
-                    </span>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {[
-                        { label: 'Essential 240 GSM', path: '/collections/essentials' },
-                        { label: 'Heavyweight 280 GSM', path: '/shop?filter=heavyweight' },
-                        { label: 'Architectural Cuts', path: '/materials' },
-                        { label: 'Full Collection', path: '/shop' },
-                      ].map((col) => (
-                        <button
-                          key={col.label}
-                          onClick={() => {
-                            closeSearch();
-                            onNavigate(col.path);
-                          }}
-                          className="p-2.5 border border-ravetto-border text-left hover:border-ravetto-teal hover:bg-ravetto-offwhite-paper transition-all"
-                        >
-                          <span className="block text-[11px] font-medium uppercase tracking-wider text-ravetto-text">
-                            {col.label}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
                   {/* Popular Searches */}
-                  <div className="space-y-2.5 pt-2 border-t border-ravetto-border/60">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ravetto-muted block">
+                  <div className="space-y-3">
+                    <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#879E57] block">
                       Popular Searches
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -153,7 +125,7 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
                         <button
                           key={term}
                           onClick={() => setQuery(term)}
-                          className="px-3 py-1.5 border border-ravetto-border text-xs uppercase tracking-wider text-ravetto-text hover:border-ravetto-teal hover:text-ravetto-teal transition-colors"
+                          className="px-4 py-2 rounded-full border border-[#5C4033]/15 text-xs font-semibold text-[#5C4033] hover:border-[#879E57] hover:bg-[#879E57]/10 hover:text-[#879E57] transition-colors shadow-sm"
                         >
                           {term}
                         </button>
@@ -161,19 +133,29 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
                     </div>
                   </div>
 
-                  {/* Recent Searches */}
-                  <div className="space-y-2 pt-2 border-t border-ravetto-border/60">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-ravetto-muted block">
-                      Recent Searches
+                  {/* Collections Shortcut */}
+                  <div className="space-y-3 pt-3 border-t border-[#5C4033]/10">
+                    <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#8C7E7E] block">
+                      Explore Collections
                     </span>
-                    <div className="flex flex-wrap gap-2 text-xs text-ravetto-muted">
-                      {['Heavyweight Oversized', 'Deep Teal M', '240 GSM'].map((r) => (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {[
+                        { label: 'Oversized T-Shirts', path: '/shop?fit=oversized' },
+                        { label: 'Classic Fit', path: '/shop?fit=regular' },
+                        { label: 'Graphic Tees', path: '/shop?fit=graphic' },
+                        { label: 'Essentials', path: '/shop' },
+                      ].map((col) => (
                         <button
-                          key={r}
-                          onClick={() => setQuery(r)}
-                          className="hover:text-ravetto-teal underline transition-colors"
+                          key={col.label}
+                          onClick={() => {
+                            closeSearch();
+                            onNavigate(col.path);
+                          }}
+                          className="p-3 rounded-2xl bg-[#FDFCF5] border border-[#5C4033]/08 text-left hover:border-[#879E57] hover:bg-white transition-all shadow-sm"
                         >
-                          {r}
+                          <span className="block text-xs font-bold text-[#5C4033]">
+                            {col.label}
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -185,15 +167,15 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
               {query.trim() && (
                 <div className="max-h-[60vh] overflow-y-auto p-6 space-y-4">
                   {isLoading ? (
-                    <div className="py-12 text-center text-xs text-ravetto-muted uppercase tracking-widest">
-                      Searching atelier catalog...
+                    <div className="py-12 text-center text-xs text-[#8C7E7E] uppercase tracking-wider font-outfit">
+                      Searching catalog...
                     </div>
                   ) : results.length > 0 ? (
                     <div className="space-y-3">
-                      <span className="text-[11px] uppercase tracking-[0.16em] text-ravetto-muted block">
-                        {results.length} Pieces Discovered
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#8C7E7E] block text-left">
+                        {results.length} {results.length === 1 ? 'Garment Found' : 'Garments Found'}
                       </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {results.map((product) => (
                           <div
                             key={product.id}
@@ -201,9 +183,9 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
                               closeSearch();
                               onNavigate(`/products/${product.slug}`);
                             }}
-                            className="flex space-x-3.5 p-3 border border-ravetto-border/60 hover:border-ravetto-teal cursor-pointer transition-all bg-ravetto-offwhite-paper/40 group"
+                            className="flex items-center space-x-3.5 p-3 rounded-[20px] border border-[#5C4033]/08 hover:border-[#879E57] cursor-pointer transition-all bg-[#FDFCF5] hover:bg-white shadow-sm group text-left"
                           >
-                            <div className="w-16 h-20 bg-ravetto-offwhite-paper flex-shrink-0 overflow-hidden">
+                            <div className="w-16 h-20 rounded-[14px] bg-[#F7F6EE] flex-shrink-0 overflow-hidden">
                               <img
                                 src={product.images?.[0]?.url}
                                 alt={product.name}
@@ -211,27 +193,27 @@ export const SearchOverlay: React.FC<SearchOverlayProps> = ({ onNavigate }) => {
                               />
                             </div>
                             <div className="flex-1 flex flex-col justify-center space-y-1">
-                              <span className="text-[10px] uppercase tracking-widest text-ravetto-muted font-mono">
-                                {product.gsm} GSM &bull; {product.fit}
-                              </span>
-                              <h4 className="text-xs uppercase tracking-wider font-medium text-ravetto-text group-hover:text-ravetto-teal transition-colors">
+                              <h4 className="font-outfit text-xs sm:text-sm font-bold text-[#5C4033] group-hover:text-[#879E57] transition-colors leading-snug">
                                 {product.name}
                               </h4>
+                              <p className="text-[11px] text-[#8C7E7E] font-sans">
+                                {product.variants?.[0]?.color?.name || 'Standard'} &bull; {product.fit}
+                              </p>
                               <Price amount={product.price} size="sm" />
                             </div>
-                            <ArrowRight className="w-4 h-4 self-center text-ravetto-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <ArrowRight className="w-4 h-4 text-[#879E57] opacity-0 group-hover:opacity-100 transition-opacity" />
                           </div>
                         ))}
                       </div>
                     </div>
                   ) : (
                     /* Empty Search State */
-                    <div className="py-12 text-center space-y-2">
-                      <p className="text-xs uppercase tracking-[0.2em] font-medium text-ravetto-text">
-                        NOTHING FOUND.
+                    <div className="py-12 text-center space-y-2 font-outfit">
+                      <p className="text-xs uppercase tracking-[0.2em] font-bold text-[#5C4033]">
+                        No garments found.
                       </p>
-                      <p className="text-xs text-ravetto-muted">
-                        Try another phrase or explore the collection.
+                      <p className="text-xs text-[#8C7E7E] font-sans">
+                        Try searching for 'oversized', 'black', or '240 GSM'.
                       </p>
                     </div>
                   )}

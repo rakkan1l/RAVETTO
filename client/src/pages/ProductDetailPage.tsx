@@ -130,32 +130,32 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
   };
 
   return (
-    <div className="min-h-screen bg-ravetto-offwhite">
+    <div className="min-h-screen bg-[#FDFCF5]">
       {/* Top Editorial Breadcrumb */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 py-5 text-[11px] uppercase tracking-[0.16em] text-ravetto-muted border-b border-ravetto-border flex items-center space-x-2">
-        <button onClick={() => onNavigate('/shop')} className="hover:text-ravetto-text">
-          Catalog
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 py-5 text-xs font-outfit uppercase tracking-[0.14em] text-[#8C7E7E] border-b border-[#5C4033]/08 flex items-center space-x-2">
+        <button onClick={() => onNavigate('/shop')} className="hover:text-[#5C4033] transition-colors">
+          Shop All
         </button>
         <span>/</span>
         {product.collection && (
           <>
             <button
               onClick={() => onNavigate(`/collections/${product.collection?.slug}`)}
-              className="hover:text-ravetto-text"
+              className="hover:text-[#5C4033] transition-colors"
             >
               {product.collection.name}
             </button>
             <span>/</span>
           </>
         )}
-        <span className="text-ravetto-text font-medium">{product.name}</span>
+        <span className="text-[#5C4033] font-bold">{product.name}</span>
       </div>
 
-      {/* Main Split Layout */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 py-12 lg:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Large Photography Gallery */}
-          <div className="lg:col-span-7">
+      {/* Main Split Layout: 58-62% Gallery / 38-42% Sticky Info */}
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Left Column (58-60%): Large Photography Gallery */}
+          <div className="lg:col-span-7 xl:col-span-7">
             <ProductGallery
               images={product.images}
               selectedColorId={selectedColor?.id}
@@ -163,25 +163,27 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
             />
           </div>
 
-          {/* Right Column: Sticky Purchase Panel */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8 text-left" ref={buySectionRef}>
+          {/* Right Column (40-42%): Sticky Product Information Panel */}
+          <div className="lg:col-span-5 xl:col-span-5 lg:sticky lg:top-24 space-y-7 text-left font-outfit bg-white p-6 sm:p-8 rounded-[32px] border border-[#5C4033]/08 shadow-[0_4px_24px_rgba(92,64,51,0.04)]" ref={buySectionRef}>
             {/* Title, Badge & Price */}
-            <div className="space-y-3 pb-6 border-b border-ravetto-border">
+            <div className="space-y-3 pb-6 border-b border-[#5C4033]/10">
               <div className="flex items-center justify-between">
-                <span className="micro-caps text-ravetto-teal font-semibold">
+                <span className="text-xs font-bold uppercase tracking-[0.16em] text-[#879E57] bg-[#879E57]/10 px-3 py-1 rounded-full">
                   {product.gsm} GSM &bull; {product.fit}
                 </span>
+
+                {/* Wishlist Heart Button */}
                 <button
                   onClick={() => toggleSave(product.id, selectedColor?.id, selectedSize?.id)}
-                  className="p-1 text-ravetto-muted hover:text-ravetto-text transition-colors flex items-center space-x-1 text-[11px] uppercase tracking-wider"
+                  className="p-2 text-[#5C4033] hover:text-[#C93A5C] transition-colors flex items-center space-x-1.5 text-xs uppercase tracking-wider font-semibold rounded-full group"
                   aria-label={saved ? 'Remove piece from saved' : 'Save piece'}
                 >
-                  <Bookmark className={`w-4 h-4 ${saved ? 'fill-ravetto-teal text-ravetto-teal' : ''}`} />
-                  <span>{saved ? 'Saved' : 'Save Piece'}</span>
+                  <Bookmark className={`w-4 h-4 transition-transform duration-200 group-hover:scale-110 ${saved ? 'fill-[#C93A5C] text-[#C93A5C]' : ''}`} />
+                  <span>{saved ? 'Saved' : 'Save'}</span>
                 </button>
               </div>
 
-              <h1 className="font-editorial text-3xl sm:text-4xl font-medium tracking-tight text-ravetto-text">
+              <h1 className="font-outfit text-3xl sm:text-4xl font-bold tracking-tight text-[#5C4033] leading-tight">
                 {product.name}
               </h1>
 
@@ -193,18 +195,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
                 />
               </div>
 
-              <p className="text-xs text-ravetto-muted leading-relaxed font-sans pt-1">
+              <p className="text-sm text-[#5C4033]/80 leading-relaxed font-sans pt-1">
                 {product.shortDescription}
               </p>
             </div>
 
-            {/* Color Selector */}
+            {/* Color Selector with Large Swatches */}
             <ColorSelector
               colors={colors}
               selectedColor={selectedColor}
               onSelect={(c) => {
                 setSelectedColor(c);
-                // Check if existing size is available in new color
                 const hasSize = product.variants.some(
                   (v) => v.colorId === c.id && v.sizeId === selectedSize?.id && v.stock > 0
                 );
@@ -217,7 +218,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
               }}
             />
 
-            {/* Size Selector */}
+            {/* Size Selector with Pill Shapes */}
             <SizeSelector
               sizes={sizes}
               selectedSize={selectedSize}
@@ -229,7 +230,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
             {/* Quantity Selector & Stock Indicator */}
             <div className="flex items-center justify-between pt-1">
               <div>
-                <span className="block text-[11px] uppercase tracking-[0.14em] text-ravetto-muted font-medium mb-1.5">
+                <span className="block text-xs uppercase tracking-[0.14em] text-[#8C7E7E] font-bold mb-1.5">
                   Quantity
                 </span>
                 <QuantitySelector
@@ -242,11 +243,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
               <div className="text-right">
                 {currentVariant ? (
                   currentVariant.stock > 0 ? (
-                    <span className="text-[11px] uppercase tracking-[0.14em] text-ravetto-teal font-medium">
-                      {currentVariant.stock < 8 ? `Only ${currentVariant.stock} remaining in stock` : 'In Stock & Ready to Dispatch'}
+                    <span className="text-xs uppercase tracking-[0.12em] text-[#879E57] font-semibold block">
+                      {currentVariant.stock < 8
+                        ? `Only ${currentVariant.stock} remaining in stock`
+                        : 'In Stock & Ready to Dispatch'}
                     </span>
                   ) : (
-                    <span className="text-[11px] uppercase tracking-[0.14em] text-red-600 font-medium">
+                    <span className="text-xs uppercase tracking-[0.12em] text-[#C93A5C] font-semibold block">
                       Variant Sold Out
                     </span>
                   )
@@ -254,7 +257,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
               </div>
             </div>
 
-            {/* Purchase CTA */}
+            {/* Large ADD TO BAG Button (#879E57 Olive Pill) */}
             <div className="space-y-3 pt-2">
               <Button
                 onClick={handleAddToCart}
@@ -262,111 +265,149 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
                 isLoading={isAddingToCart}
                 variant="primary"
                 size="lg"
-                className="w-full shadow-lg"
+                className="w-full py-4 text-sm font-bold shadow-[0_6px_20px_rgba(135,158,87,0.35)]"
               >
-                Add to Bag &bull; ₹{(product.price * quantity).toLocaleString('en-IN')}
+                ADD TO BAG &bull; ₹{(product.price * quantity).toLocaleString('en-IN')}
               </Button>
 
-              <p className="text-[10px] uppercase tracking-[0.16em] text-center text-ravetto-muted">
-                Complimentary Shipping On All Orders Over ₹2,000
+              <p className="text-xs uppercase tracking-[0.14em] text-center text-[#8C7E7E]">
+                Complimentary Express Shipping Over ₹2,000
               </p>
             </div>
 
-            {/* Trust Assurances */}
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-ravetto-border text-center text-[10px] uppercase tracking-wider text-ravetto-muted">
+            {/* Under Button Trust Strip */}
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[#5C4033]/10 text-center text-[10px] sm:text-[11px] uppercase tracking-wider text-[#8C7E7E]">
               <div className="flex flex-col items-center space-y-1">
-                <Truck className="w-4 h-4 text-ravetto-teal" />
+                <Truck className="w-4 h-4 text-[#879E57]" />
                 <span>Bluedart Air Express</span>
               </div>
               <div className="flex flex-col items-center space-y-1">
-                <RefreshCw className="w-4 h-4 text-ravetto-teal" />
-                <span>14-Day Quiet Returns</span>
+                <RefreshCw className="w-4 h-4 text-[#879E57]" />
+                <span>14-Day Exchanges</span>
               </div>
               <div className="flex flex-col items-center space-y-1">
-                <ShieldCheck className="w-4 h-4 text-ravetto-teal" />
-                <span>Zero Shrinkage Guarantee</span>
+                <ShieldCheck className="w-4 h-4 text-[#879E57]" />
+                <span>Zero Shrinkage</span>
               </div>
             </div>
 
-            {/* Structured Specifications Accordion */}
-            <div className="pt-6 border-t border-ravetto-border divide-y divide-ravetto-border text-xs">
-              {/* Accordion 1: Fabric & Craft */}
+            {/* Product Details Accordions */}
+            <div className="pt-4 border-t border-[#5C4033]/10 divide-y divide-[#5C4033]/08 text-xs sm:text-sm font-sans">
+              {/* Accordion 1: Product Details */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setActiveAccordion(activeAccordion === 'details' ? null : 'details')}
+                  className="w-full py-4 flex items-center justify-between text-left font-outfit font-bold uppercase tracking-[0.14em] text-[#5C4033]"
+                >
+                  <span>Product Details</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      activeAccordion === 'details' ? 'rotate-180 text-[#879E57]' : 'text-[#8C7E7E]'
+                    }`}
+                  />
+                </button>
+                {activeAccordion === 'details' && (
+                  <div className="pb-4 space-y-2 text-[#5C4033]/80 leading-relaxed font-sans">
+                    <p>{product.longDescription || product.shortDescription}</p>
+                    <p>Designed for daily rotation with reinforced collar resilience and balanced shoulder drop.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 2: Fabric */}
               <div>
                 <button
                   type="button"
                   onClick={() => setActiveAccordion(activeAccordion === 'fabric' ? null : 'fabric')}
-                  className="w-full py-4 flex items-center justify-between text-left font-semibold uppercase tracking-[0.16em] text-ravetto-text"
+                  className="w-full py-4 flex items-center justify-between text-left font-outfit font-bold uppercase tracking-[0.14em] text-[#5C4033]"
                 >
-                  <span>Fabric & Craftsmanship Details</span>
+                  <span>Fabric Specifications</span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
-                      activeAccordion === 'fabric' ? 'rotate-180 text-ravetto-teal' : 'text-ravetto-muted'
+                      activeAccordion === 'fabric' ? 'rotate-180 text-[#879E57]' : 'text-[#8C7E7E]'
                     }`}
                   />
                 </button>
                 {activeAccordion === 'fabric' && (
-                  <div className="pb-4 space-y-2.5 text-ravetto-muted leading-relaxed">
-                    <p><strong className="text-ravetto-text">Composition:</strong> {product.fabricComposition}</p>
-                    <p><strong className="text-ravetto-text">Knit Weight:</strong> {product.gsm} GSM High-Gauge</p>
-                    <p><strong className="text-ravetto-text">Collar:</strong> {product.neckType}</p>
-                    <p><strong className="text-ravetto-text">Finish:</strong> {product.finish}</p>
-                    <p><strong className="text-ravetto-text">Origin:</strong> Knitted & tailored in {product.origin}</p>
-                    {product.craftsmanshipDetails && (
-                      <p><strong className="text-ravetto-text">Atelier Notes:</strong> {product.craftsmanshipDetails}</p>
-                    )}
+                  <div className="pb-4 space-y-2 text-[#5C4033]/80 leading-relaxed">
+                    <p><strong className="text-[#5C4033]">Composition:</strong> {product.fabricComposition}</p>
+                    <p><strong className="text-[#5C4033]">Yarn Weight:</strong> {product.gsm} GSM Dense Knit</p>
+                    <p><strong className="text-[#5C4033]">Neck Ribbing:</strong> 1x1 Lycra-reinforced collar</p>
+                    <p><strong className="text-[#5C4033]">Origin:</strong> Knitted & finished in Tiruppur, India</p>
                   </div>
                 )}
               </div>
 
-              {/* Accordion 2: Care Protocols */}
+              {/* Accordion 3: Fit */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setActiveAccordion(activeAccordion === 'fit' ? null : 'fit')}
+                  className="w-full py-4 flex items-center justify-between text-left font-outfit font-bold uppercase tracking-[0.14em] text-[#5C4033]"
+                >
+                  <span>Fit & Proportions</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      activeAccordion === 'fit' ? 'rotate-180 text-[#879E57]' : 'text-[#8C7E7E]'
+                    }`}
+                  />
+                </button>
+                {activeAccordion === 'fit' && (
+                  <div className="pb-4 space-y-2 text-[#5C4033]/80 leading-relaxed">
+                    <p><strong className="text-[#5C4033]">Fit Style:</strong> {product.fit}</p>
+                    <p><strong className="text-[#5C4033]">Model Specs:</strong> {product.modelHeight || "6'1\" (185cm)"} wearing Size {product.modelSize || 'M'}</p>
+                    <button
+                      type="button"
+                      onClick={openSizeGuide}
+                      className="text-[#879E57] font-semibold underline text-xs pt-1 block"
+                    >
+                      View Size Guide & Measurement Chart &rarr;
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 4: Care */}
               <div>
                 <button
                   type="button"
                   onClick={() => setActiveAccordion(activeAccordion === 'care' ? null : 'care')}
-                  className="w-full py-4 flex items-center justify-between text-left font-semibold uppercase tracking-[0.16em] text-ravetto-text"
+                  className="w-full py-4 flex items-center justify-between text-left font-outfit font-bold uppercase tracking-[0.14em] text-[#5C4033]"
                 >
-                  <span>Care Protocols</span>
+                  <span>Care Instructions</span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
-                      activeAccordion === 'care' ? 'rotate-180 text-ravetto-teal' : 'text-ravetto-muted'
+                      activeAccordion === 'care' ? 'rotate-180 text-[#879E57]' : 'text-[#8C7E7E]'
                     }`}
                   />
                 </button>
                 {activeAccordion === 'care' && (
-                  <div className="pb-4 space-y-2 text-ravetto-muted leading-relaxed">
+                  <div className="pb-4 space-y-2 text-[#5C4033]/80 leading-relaxed">
                     <p>{product.washCare}</p>
-                    <p className="text-[11px]">
-                      Because our cotton is pre-shrunk via steam stabilization, hot drying is unnecessary and will shorten fiber longevity.
-                    </p>
+                    <p className="text-xs text-[#8C7E7E]">Steam stabilized before assembly to guarantee zero dimensional variation.</p>
                   </div>
                 )}
               </div>
 
-              {/* Accordion 3: Sizing & Model */}
+              {/* Accordion 5: Delivery & Exchanges */}
               <div>
                 <button
                   type="button"
-                  onClick={() => setActiveAccordion(activeAccordion === 'model' ? null : 'model')}
-                  className="w-full py-4 flex items-center justify-between text-left font-semibold uppercase tracking-[0.16em] text-ravetto-text"
+                  onClick={() => setActiveAccordion(activeAccordion === 'delivery' ? null : 'delivery')}
+                  className="w-full py-4 flex items-center justify-between text-left font-outfit font-bold uppercase tracking-[0.14em] text-[#5C4033]"
                 >
-                  <span>Model Dimensions</span>
+                  <span>Delivery & Exchanges</span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
-                      activeAccordion === 'model' ? 'rotate-180 text-ravetto-teal' : 'text-ravetto-muted'
+                      activeAccordion === 'delivery' ? 'rotate-180 text-[#879E57]' : 'text-[#8C7E7E]'
                     }`}
                   />
                 </button>
-                {activeAccordion === 'model' && (
-                  <div className="pb-4 space-y-2 text-ravetto-muted leading-relaxed">
-                    <p><strong className="text-ravetto-text">Height:</strong> {product.modelHeight || "6'1\" (185cm)"}</p>
-                    <p><strong className="text-ravetto-text">Proportion:</strong> {product.modelSize || 'Wearing Size M'}</p>
-                    <button
-                      type="button"
-                      onClick={openSizeGuide}
-                      className="text-ravetto-teal underline font-medium uppercase tracking-wider text-[11px] pt-1 block"
-                    >
-                      Open Full Size Architecture Chart &rarr;
-                    </button>
+                {activeAccordion === 'delivery' && (
+                  <div className="pb-4 space-y-2 text-[#5C4033]/80 leading-relaxed">
+                    <p>Dispatched within 24 hours via Bluedart Air Express (2-4 business days).</p>
+                    <p>Hassle-free 14-day exchange protocol for unworn garments.</p>
                   </div>
                 )}
               </div>
@@ -376,15 +417,15 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
 
         {/* Narrative Garment Story Section */}
         {product.story && (
-          <div className="mt-24 pt-16 border-t border-ravetto-border">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <span className="micro-caps text-ravetto-teal block">
-                The Narrative
+          <div className="mt-20 pt-16 border-t border-[#5C4033]/10">
+            <div className="max-w-3xl mx-auto text-center space-y-4">
+              <span className="text-xs font-outfit font-semibold uppercase tracking-[0.2em] text-[#879E57] block">
+                THE NARRATIVE
               </span>
-              <h2 className="font-editorial text-3xl sm:text-4xl font-medium tracking-tight text-ravetto-text">
+              <h2 className="font-outfit text-3xl sm:text-4xl font-bold tracking-tight text-[#5C4033]">
                 The Thought Behind The Cut
               </h2>
-              <p className="text-sm text-ravetto-muted leading-relaxed font-sans">
+              <p className="text-base text-[#5C4033]/85 leading-relaxed font-sans">
                 {product.story}
               </p>
             </div>
@@ -392,30 +433,30 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ slug, onNa
         )}
 
         {/* Customer Reviews Spotlight */}
-        <div className="mt-24 pt-16 border-t border-ravetto-border">
-          <div className="max-w-[1440px] mx-auto">
-            <div className="flex items-center justify-between pb-8 border-b border-ravetto-border">
-              <h3 className="font-editorial text-2xl font-medium text-ravetto-text">
-                Atelier Notes & Impressions
+        <div className="mt-20 pt-16 border-t border-[#5C4033]/10">
+          <div className="max-w-[1360px] mx-auto text-left">
+            <div className="flex items-center justify-between pb-8 border-b border-[#5C4033]/10">
+              <h3 className="font-outfit text-2xl sm:text-3xl font-bold text-[#5C4033]">
+                Verified Impressions
               </h3>
-              <span className="font-mono text-xs text-ravetto-muted uppercase tracking-widest">
-                [Verified Owners]
+              <span className="font-outfit text-xs font-semibold text-[#8C7E7E] uppercase tracking-wider">
+                [Owner Feedback]
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
               {(product.reviews || []).map((review) => (
-                <div key={review.id} className="p-6 bg-ravetto-offwhite-paper border border-ravetto-border text-left space-y-3">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-ravetto-text">{review.authorName}</span>
-                    <span className="text-ravetto-teal text-[11px] uppercase tracking-wider font-mono">
-                      Verified Purchase
+                <div key={review.id} className="p-6 bg-white rounded-[24px] border border-[#5C4033]/08 shadow-[0_2px_12px_rgba(92,64,51,0.03)] text-left space-y-3">
+                  <div className="flex items-center justify-between text-xs font-outfit">
+                    <span className="font-bold text-[#5C4033]">{review.authorName}</span>
+                    <span className="text-[#879E57] font-semibold text-[11px] uppercase tracking-wider">
+                      Verified Owner
                     </span>
                   </div>
-                  <h4 className="text-xs uppercase tracking-wider font-medium text-ravetto-text">
+                  <h4 className="font-outfit text-sm uppercase tracking-wider font-bold text-[#5C4033]">
                     "{review.title}"
                   </h4>
-                  <p className="text-xs text-ravetto-muted leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#5C4033]/80 leading-relaxed font-sans">
                     {review.comment}
                   </p>
                 </div>

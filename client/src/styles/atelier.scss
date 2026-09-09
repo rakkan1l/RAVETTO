@@ -2,19 +2,23 @@
 // RAVETTO SASS ARCHITECTURE (atelier.scss)
 // ==========================================
 
-$color-offwhite: #F5F4EF;
-$color-offwhite-paper: #EFECE4;
-$color-teal: #0D4F4A;
-$color-teal-dark: #083834;
-$color-teal-light: #14645E;
-$color-mint: #B8E0D2;
-$color-mint-subtle: #EAF6F2;
-$color-text: #172B2A;
-$color-muted: #617371;
-$color-border: #E2DFD6;
+$color-cream: #FDFCF5;
+$color-offwhite: #FDFCF5;
+$color-offwhite-paper: #F7F6EE;
+$color-olive: #879E57;
+$color-olive-dark: #728848;
+$color-teal: #879E57;
+$color-teal-dark: #728848;
+$color-teal-light: #9CB36D;
+$color-brown: #5C4033;
+$color-text: #5C4033;
+$color-berry: #C93A5C;
+$color-warmgrey: #8C7E7E;
+$color-muted: #8C7E7E;
+$color-border: #EADBCC;
 
-$font-primary: 'Figtree', 'Red Hat Display', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-editorial: 'Playfair Display', Georgia, serif;
+$font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+$font-editorial: 'Outfit', sans-serif;
 $font-mono: 'JetBrains Mono', monospace;
 
 // SASS Mixins
@@ -32,8 +36,8 @@ $font-mono: 'JetBrains Mono', monospace;
   }
 }
 
-@mixin micro-type($spacing: 0.2em) {
-  font-family: $font-primary;
+@mixin micro-type($spacing: 0.18em) {
+  font-family: $font-editorial;
   text-transform: uppercase;
   letter-spacing: $spacing;
   font-size: 0.6875rem;

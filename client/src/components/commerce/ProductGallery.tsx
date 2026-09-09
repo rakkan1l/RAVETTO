@@ -16,24 +16,22 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeImages, setActiveImages] = useState<ProductImage[]>(images);
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
 
-  // 5. COLOR VARIANT TRANSITION SEQUENCE:
-  // current image -> fade -> slight blur -> new variant image -> sharpen (300-450ms total)
   useEffect(() => {
     setIsTransitioning(true);
-
     const timer = setTimeout(() => {
       const filtered = selectedColorId
         ? images.filter((img) => img.colorId === selectedColorId || !img.colorId)
         : images;
       setActiveImages(filtered.length > 0 ? filtered : images);
+      setActiveMobileIndex(0);
 
       const sharpenTimer = setTimeout(() => {
         setIsTransitioning(false);
-      }, 180);
-
+      }, 160);
       return () => clearTimeout(sharpenTimer);
-    }, 180);
+    }, 160);
 
     return () => clearTimeout(timer);
   }, [selectedColorId, images]);
@@ -41,54 +39,92 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
   return (
     <>
       <div className="w-full flex flex-col space-y-4">
-        {/* Gallery Stack */}
-        <div className="grid grid-cols-1 gap-4">
-          {activeImages.map((img, idx) => (
-            <div
-              key={img.id || idx}
-              className="relative aspect-[3/4] bg-ravetto-offwhite-paper border border-ravetto-border overflow-hidden group cursor-zoom-in select-none"
-              onClick={() => setFullscreenImage(img.url)}
-            >
-              <img
-                src={img.url}
-                alt={img.alt || `${productName} - Plate 0${idx + 1}`}
-                loading={idx === 0 ? 'eager' : 'lazy'}
-                className={`w-full h-full object-cover transition-all duration-350 ease-out group-hover:scale-[1.01] ${
-                  isTransitioning ? 'opacity-40 blur-sm scale-[0.99]' : 'opacity-100 blur-0 scale-100'
+        {/* Desktop Layout: Large Hero + 2-Column Grid */}
+        <div className="hidden sm:grid grid-cols-2 gap-4">
+          {activeImages.map((img, idx) => {
+            const isHero = idx === 0;
+            return (
+              <div
+                key={img.id || idx}
+                className={`relative rounded-[26px] bg-white p-2 border border-[#5C4033]/08 shadow-[0_2px_12px_rgba(92,64,51,0.03)] overflow-hidden group cursor-zoom-in select-none ${
+                  isHero ? 'col-span-2 aspect-[4/3] sm:aspect-[16/11]' : 'col-span-1 aspect-[3/4]'
                 }`}
-              />
-
-              {/* Angle Tag */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[9px] uppercase font-mono tracking-widest text-ravetto-text pointer-events-none">
-                {idx === 0 ? 'Editorial Studio' : idx === 1 ? 'Profile Drape' : 'Texture Detail'}
-              </div>
-
-              {/* Fullscreen Trigger */}
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setFullscreenImage(img.url);
-                }}
-                className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-ravetto-text hover:bg-white"
-                aria-label="Enlarge image"
+                onClick={() => setFullscreenImage(img.url)}
               >
-                <Maximize2 className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          ))}
+                <div className="w-full h-full rounded-[20px] overflow-hidden bg-[#F7F6EE] relative">
+                  <img
+                    src={img.url}
+                    alt={img.alt || `${productName} - Shot 0${idx + 1}`}
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    className={`w-full h-full object-cover object-center transition-all duration-350 ease-out group-hover:scale-[1.02] ${
+                      isTransitioning ? 'opacity-35 blur-sm scale-[0.99]' : 'opacity-100 blur-0 scale-100'
+                    }`}
+                  />
+
+                  {/* Micro Angle Badge */}
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-outfit uppercase tracking-wider text-[#5C4033] font-semibold shadow-sm border border-[#5C4033]/05">
+                    {idx === 0 ? 'Studio Front' : idx === 1 ? 'Profile Drape' : 'Fabric & Stitch'}
+                  </div>
+
+                  {/* Zoom Action Icon */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setFullscreenImage(img.url);
+                    }}
+                    className="absolute top-3 right-3 p-2 bg-white/85 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-[#5C4033] hover:bg-white shadow-sm"
+                    aria-label="Enlarge image"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile Swipeable Gallery with Indicator */}
+        <div className="sm:hidden relative">
+          <div
+            className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none rounded-[28px] bg-white p-2 border border-[#5C4033]/08 shadow-sm"
+            onScroll={(e) => {
+              const target = e.currentTarget;
+              const index = Math.round(target.scrollLeft / target.offsetWidth);
+              setActiveMobileIndex(index);
+            }}
+          >
+            {activeImages.map((img, idx) => (
+              <div
+                key={img.id || idx}
+                className="w-full shrink-0 snap-center aspect-[3/4] rounded-[22px] overflow-hidden bg-[#F7F6EE] relative"
+                onClick={() => setFullscreenImage(img.url)}
+              >
+                <img
+                  src={img.url}
+                  alt={img.alt || `${productName} - Shot 0${idx + 1}`}
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Image Counter / Dots */}
+          <div className="absolute bottom-5 right-5 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-outfit font-bold text-[#5C4033] shadow-md border border-[#5C4033]/08">
+            {activeMobileIndex + 1} / {activeImages.length}
+          </div>
         </div>
       </div>
 
       {/* Fullscreen Lightbox Modal */}
       {fullscreenImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-50 bg-[#5C4033]/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
           onClick={() => setFullscreenImage(null)}
         >
           <button
             onClick={() => setFullscreenImage(null)}
-            className="absolute top-6 right-6 p-3 text-white/80 hover:text-white"
+            className="absolute top-6 right-6 p-3 text-white/80 hover:text-white rounded-full bg-black/20"
             aria-label="Close fullscreen"
           >
             <X className="w-6 h-6" />
@@ -96,7 +132,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
           <img
             src={fullscreenImage}
             alt={productName}
-            className="max-h-[90vh] max-w-[90vw] object-contain shadow-2xl"
+            className="max-h-[90vh] max-w-[90vw] object-contain rounded-[20px] shadow-2xl"
           />
         </div>
       )}

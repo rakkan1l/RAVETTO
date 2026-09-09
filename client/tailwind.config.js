@@ -8,27 +8,43 @@ export default {
     extend: {
       colors: {
         ravetto: {
-          teal: '#0D4F4A',
-          'teal-dark': '#083834',
-          'teal-light': '#14645E',
-          mint: '#B8E0D2',
-          'mint-subtle': '#EAF6F2',
-          'mint-dark': '#8BC9B6',
-          offwhite: '#F5F4EF',
-          'offwhite-paper': '#EFECE4',
-          text: '#172B2A',
-          muted: '#617371',
-          border: '#E2DFD6',
-          'border-light': '#EDEAE3',
-          chalk: '#1A2120',
+          // New Warm Fashion Editorial Palette
+          cream: '#FDFCF5',
+          olive: '#879E57',
+          'olive-dark': '#728848',
+          'olive-light': '#9CB36D',
+          brown: '#5C4033',
+          'brown-dark': '#483126',
+          'brown-light': '#745444',
+          berry: '#C93A5C',
+          'berry-light': '#F6EBF0',
+          warmgrey: '#8C7E7E',
+          'warmgrey-light': '#A59A9A',
+          border: '#EADBCC',
+          'border-subtle': 'rgba(92, 64, 51, 0.08)',
+          card: '#FFFFFF',
+          'card-warm': '#F9F8F1',
+
+          // Preserved semantic aliases for backward compatibility
+          teal: '#879E57', // Aliased to Olive for seamless CTA compatibility
+          'teal-dark': '#728848',
+          'teal-light': '#9CB36D',
+          mint: '#879E57',
+          'mint-subtle': '#F2F5EC',
+          'mint-dark': '#728848',
+          offwhite: '#FDFCF5',
+          'offwhite-paper': '#F7F6EE',
+          text: '#5C4033', // Aliased to Chocolate Brown
+          muted: '#8C7E7E', // Aliased to Warm Grey
+          chalk: '#483126',
         }
       },
       fontFamily: {
-        sans: ['"Figtree"', '"Red Hat Display"', '"Poppins"', 'system-ui', '-apple-system', 'sans-serif'],
-        figtree: ['"Figtree"', 'sans-serif'],
-        redhat: ['"Red Hat Display"', 'sans-serif'],
-        poppins: ['"Poppins"', 'sans-serif'],
-        editorial: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+        outfit: ['"Outfit"', 'sans-serif'],
+        heading: ['"Outfit"', 'sans-serif'],
+        editorial: ['"Outfit"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       letterSpacing: {

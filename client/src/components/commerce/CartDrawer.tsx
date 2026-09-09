@@ -50,35 +50,33 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
         </div>
       ) : (
         /* Active Bag Flow */
-        <div className="flex flex-col h-full justify-between">
+        <div className="flex flex-col h-full justify-between font-outfit text-left">
           {/* Top: Complimentary Shipping Bar */}
-          <div className="pb-5 border-b border-ravetto-border">
-            <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.14em] font-medium mb-2 text-ravetto-text">
-              <span className="flex items-center space-x-1.5">
-                <span>
-                  {cart.isFreeShipping
-                    ? 'COMPLIMENTARY SHIPPING UNLOCKED'
-                    : `₹${cart.amountNeededForFreeShipping.toLocaleString('en-IN')} AWAY FROM COMPLIMENTARY SHIPPING`}
-                </span>
+          <div className="pb-5 border-b border-[#5C4033]/10">
+            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider mb-2 text-[#5C4033]">
+              <span>
+                {cart.isFreeShipping
+                  ? 'Complimentary Delivery Unlocked'
+                  : `You're ₹${cart.amountNeededForFreeShipping.toLocaleString('en-IN')} away from free delivery`}
               </span>
-              <span className="font-mono text-[10px] text-ravetto-muted">{cart.freeShippingProgress}%</span>
+              <span className="text-xs text-[#879E57] font-bold">{cart.freeShippingProgress}%</span>
             </div>
             {/* Progress Bar */}
-            <div className="w-full h-[2px] bg-ravetto-border/60 overflow-hidden">
+            <div className="w-full h-1.5 bg-[#5C4033]/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-ravetto-teal transition-all duration-500 ease-out"
+                className="h-full bg-[#879E57] rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${cart.freeShippingProgress}%` }}
               />
             </div>
           </div>
 
           {/* Middle: Items List */}
-          <div className="flex-1 overflow-y-auto py-4 divide-y divide-ravetto-border/60">
+          <div className="flex-1 overflow-y-auto py-4 divide-y divide-[#5C4033]/08">
             {cart.items.map((item) => (
               <div key={item.id} className="py-4 flex space-x-3.5 text-left">
-                {/* Image */}
+                {/* Rounded Image Container */}
                 <div
-                  className="w-20 h-24 bg-ravetto-offwhite-paper flex-shrink-0 cursor-pointer overflow-hidden"
+                  className="w-20 h-24 rounded-[16px] bg-white p-1 border border-[#5C4033]/10 flex-shrink-0 cursor-pointer overflow-hidden shadow-sm"
                   onClick={() => {
                     closeCart();
                     onNavigate(`/products/${item.productSlug}`);
@@ -87,7 +85,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                   <img
                     src={item.image}
                     alt={item.productName}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-[12px]"
                   />
                 </div>
 
@@ -96,7 +94,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                   <div>
                     <div className="flex justify-between items-start">
                       <h4
-                        className="text-xs uppercase tracking-[0.12em] font-medium text-ravetto-text hover:text-ravetto-teal cursor-pointer"
+                        className="text-xs sm:text-sm font-bold text-[#5C4033] hover:text-[#879E57] cursor-pointer transition-colors"
                         onClick={() => {
                           closeCart();
                           onNavigate(`/products/${item.productSlug}`);
@@ -106,14 +104,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                       </h4>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="text-ravetto-muted hover:text-red-600 p-1 transition-colors"
+                        className="text-[#8C7E7E] hover:text-[#C93A5C] p-1 transition-colors"
                         aria-label="Remove item"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
 
-                    <p className="text-[11px] text-ravetto-muted mt-0.5">
+                    <p className="text-xs text-[#8C7E7E] mt-0.5 font-sans">
                       {item.color} &bull; Size {item.size}
                     </p>
 
@@ -130,7 +128,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
                       onChange={(newQty) => updateItem(item.id, newQty)}
                       disabled={isLoading}
                     />
-                    <span className="text-xs font-mono font-medium text-ravetto-text">
+                    <span className="text-xs font-bold text-[#5C4033]">
                       ₹{item.total.toLocaleString('en-IN')}
                     </span>
                   </div>
@@ -139,44 +137,49 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onNavigate }) => {
             ))}
           </div>
 
-          {/* Bottom: Subtotal & Checkout Button */}
-          <div className="pt-4 border-t border-ravetto-border space-y-3">
-            <div className="flex justify-between text-xs uppercase tracking-[0.14em] text-ravetto-muted">
+          {/* Bottom: Subtotal & Dual Buttons (View Bag & Checkout) */}
+          <div className="pt-4 border-t border-[#5C4033]/10 space-y-3">
+            <div className="flex justify-between text-xs uppercase tracking-wider text-[#8C7E7E] font-semibold">
               <span>Subtotal</span>
-              <span className="font-mono font-medium text-ravetto-text">
+              <span className="font-bold text-[#5C4033]">
                 ₹{cart.subtotal.toLocaleString('en-IN')}
               </span>
             </div>
 
-            <div className="flex justify-between text-xs uppercase tracking-[0.14em] text-ravetto-muted">
-              <span>Estimated Shipping</span>
-              <span className="font-mono font-medium text-ravetto-text">
-                {cart.shippingFee === 0 ? 'Complimentary' : `₹${cart.shippingFee}`}
+            <div className="flex justify-between text-xs uppercase tracking-wider text-[#8C7E7E] font-semibold">
+              <span>Delivery</span>
+              <span className="font-bold text-[#5C4033]">
+                {cart.shippingFee === 0 ? 'Free' : `₹${cart.shippingFee}`}
               </span>
             </div>
 
-            <div className="flex justify-between text-sm uppercase tracking-[0.16em] font-medium text-ravetto-text pt-2 border-t border-ravetto-border">
-              <span>Estimated Total</span>
-              <span className="font-mono font-bold text-ravetto-teal">
+            <div className="flex justify-between text-sm uppercase tracking-wider font-bold text-[#5C4033] pt-2 border-t border-[#5C4033]/10">
+              <span>Total</span>
+              <span className="text-base text-[#879E57]">
                 ₹{cart.total.toLocaleString('en-IN')}
               </span>
             </div>
 
-            <p className="text-[10px] text-ravetto-muted tracking-wide text-center">
-              Taxes calculated at checkout &bull; 14-day quiet returns
-            </p>
-
-            <Button
-              onClick={() => {
-                closeCart();
-                onNavigate('/checkout');
-              }}
-              variant="primary"
-              size="lg"
-              className="w-full uppercase tracking-[0.16em] text-xs"
-            >
-              Checkout &bull; ₹{cart.total.toLocaleString('en-IN')}
-            </Button>
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <button
+                onClick={() => {
+                  closeCart();
+                  onNavigate('/cart');
+                }}
+                className="w-full py-3.5 rounded-full border border-[#5C4033]/20 bg-white text-[#5C4033] hover:bg-[#5C4033] hover:text-white text-xs font-bold uppercase tracking-wider transition-all duration-200"
+              >
+                View Bag
+              </button>
+              <button
+                onClick={() => {
+                  closeCart();
+                  onNavigate('/checkout');
+                }}
+                className="w-full py-3.5 rounded-full bg-[#879E57] hover:bg-[#728848] text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md"
+              >
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
       )}

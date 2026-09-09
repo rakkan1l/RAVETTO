@@ -1,49 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-offwhite: #F5F4EF;
-  --color-offwhite-paper: #EFECE4;
-  --color-teal: #0D4F4A;
-  --color-teal-dark: #083834;
-  --color-teal-light: #14645E;
-  --color-mint: #B8E0D2;
-  --color-mint-subtle: #EAF6F2;
-  --color-text: #172B2A;
-  --color-border: #E2DFD6;
+  --color-cream: #FDFCF5;
+  --color-white: #FFFFFF;
+  --color-brown: #5C4033;
+  --color-brown-dark: #483126;
+  --color-olive: #879E57;
+  --color-olive-dark: #728848;
+  --color-berry: #C93A5C;
+  --color-warmgrey: #8C7E7E;
+  --color-border: #EADBCC;
+  
+  /* Legacy aliases */
+  --color-offwhite: #FDFCF5;
+  --color-offwhite-paper: #F7F6EE;
+  --color-teal: #879E57;
+  --color-teal-dark: #728848;
+  --color-teal-light: #9CB36D;
+  --color-mint: #879E57;
+  --color-mint-subtle: #F2F5EC;
+  --color-text: #5C4033;
 }
 
 body {
-  background-color: var(--color-offwhite);
-  color: var(--color-text);
-  font-family: 'Figtree', 'Red Hat Display', 'Poppins', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-brown);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
 }
 
-/* Luxury Editorial Headings */
-.font-editorial {
-  font-family: 'Playfair Display', Georgia, serif;
+/* Warm Editorial Headings */
+.font-editorial,
+.font-heading {
+  font-family: 'Outfit', sans-serif;
 }
 
 /* Micro Typography Tokens */
 .micro-caps {
-  font-family: 'Red Hat Display', 'Poppins', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.6875rem; /* 11px */
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .editorial-label {
-  font-family: 'Red Hat Display', 'Poppins', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.75rem; /* 12px */
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -84,15 +95,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5F4EF;
+  background: #FDFCF5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5D1C6;
+  background: #EADBCC;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0D4F4A;
+  background: #879E57;
 }
 
 /* Smooth Image Loading Blur State */
@@ -110,6 +122,6 @@ body {
 
 /* Focus Outlines for Accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline: 2px solid var(--color-olive);
   outline-offset: 2px;
 }

@@ -32,7 +32,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-ravetto-text/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-[#5C4033]/40 backdrop-blur-sm"
           />
 
           {/* Panel */}
@@ -41,17 +41,17 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-y-0 left-0 w-[82vw] max-w-sm bg-ravetto-offwhite shadow-2xl flex flex-col justify-between border-r border-ravetto-border p-6 sm:p-8"
+            className="absolute inset-y-0 left-0 w-[84vw] max-w-sm bg-[#FDFCF5] shadow-2xl flex flex-col justify-between border-r border-[#5C4033]/10 p-6 sm:p-8"
           >
             {/* Header */}
             <div>
-              <div className="flex items-center justify-between pb-6 border-b border-ravetto-border">
-                <span className="font-editorial text-xl tracking-[0.2em] font-medium text-ravetto-teal">
+              <div className="flex items-center justify-between pb-6 border-b border-[#5C4033]/10">
+                <span className="font-outfit text-2xl tracking-[0.18em] font-bold text-[#5C4033]">
                   RAVETTO
                 </span>
                 <button
                   onClick={onClose}
-                  className="p-2 -mr-2 text-ravetto-muted hover:text-ravetto-text"
+                  className="p-2 -mr-2 text-[#5C4033] hover:text-[#879E57] transition-colors rounded-full"
                   aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
@@ -59,7 +59,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
               </div>
 
               {/* Main Links */}
-              <nav className="mt-8 space-y-5">
+              <nav className="mt-8 space-y-4 font-outfit">
                 {navLinks.map((link) => (
                   <button
                     key={link.path}
@@ -67,29 +67,29 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
                       onNavigate(link.path);
                       onClose();
                     }}
-                    className="flex items-center justify-between w-full text-left py-1 text-sm uppercase tracking-[0.16em] text-ravetto-text hover:text-ravetto-teal transition-colors group"
+                    className="flex items-center justify-between w-full text-left py-2 text-[15px] font-medium tracking-[0.06em] text-[#5C4033] hover:text-[#879E57] transition-colors group"
                   >
                     <span>{link.label}</span>
-                    <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-ravetto-teal" />
+                    <ArrowRight className="w-4 h-4 opacity-40 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#879E57]" />
                   </button>
                 ))}
               </nav>
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-6 border-t border-ravetto-border space-y-4">
+            <div className="pt-6 border-t border-[#5C4033]/10 space-y-4 font-outfit">
               {user ? (
                 <div className="space-y-2">
-                  <div className="text-xs text-ravetto-muted uppercase tracking-widest">
-                    Signed in as <span className="text-ravetto-text font-medium">{user.firstName}</span>
+                  <div className="text-xs text-[#8C7E7E]">
+                    Signed in as <span className="text-[#5C4033] font-semibold">{user.firstName}</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-xs uppercase tracking-widest pt-2">
+                  <div className="flex items-center space-x-3 text-xs tracking-wider pt-2">
                     <button
                       onClick={() => {
                         onNavigate('/account');
                         onClose();
                       }}
-                      className="text-ravetto-teal font-medium hover:underline"
+                      className="text-[#879E57] font-semibold hover:underline"
                     >
                       Account
                     </button>
@@ -99,7 +99,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
                         logout();
                         onClose();
                       }}
-                      className="text-ravetto-muted hover:text-ravetto-text"
+                      className="text-[#8C7E7E] hover:text-[#5C4033]"
                     >
                       Sign Out
                     </button>
@@ -111,7 +111,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
                             onNavigate('/admin');
                             onClose();
                           }}
-                          className="text-amber-700 font-medium flex items-center space-x-1"
+                          className="text-amber-700 font-semibold flex items-center space-x-1"
                         >
                           <ShieldCheck className="w-3.5 h-3.5" />
                           <span>Admin</span>
@@ -127,7 +127,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
                       onClose();
                       openAuthModal('login');
                     }}
-                    className="py-2.5 text-xs font-medium uppercase tracking-[0.14em] border border-ravetto-text text-ravetto-text text-center hover:bg-ravetto-text hover:text-white transition-colors"
+                    className="py-3 text-xs font-semibold uppercase tracking-[0.14em] rounded-full border border-[#5C4033]/30 text-[#5C4033] text-center hover:bg-[#5C4033] hover:text-white transition-colors"
                   >
                     Sign In
                   </button>
@@ -136,15 +136,15 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, onNavigat
                       onClose();
                       openAuthModal('register');
                     }}
-                    className="py-2.5 text-xs font-medium uppercase tracking-[0.14em] bg-ravetto-teal text-white text-center hover:bg-ravetto-teal-dark transition-colors"
+                    className="py-3 text-xs font-semibold uppercase tracking-[0.14em] rounded-full bg-[#879E57] text-white text-center hover:bg-[#728848] transition-colors shadow-sm"
                   >
                     Join
                   </button>
                 </div>
               )}
 
-              <p className="text-[10px] uppercase tracking-[0.2em] text-ravetto-muted/70 text-center pt-2">
-                Quiet Luxury &bull; Tiruppur, India
+              <p className="text-[10px] uppercase tracking-[0.2em] text-[#8C7E7E] text-center pt-2">
+                Everyday Essentials &bull; Made Beyond Ordinary
               </p>
             </div>
           </motion.div>
